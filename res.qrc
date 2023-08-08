@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/shaders">
+        <file>rovmini.stl</file>
+        <file>stl.frag</file>
+        <file>stl.vert</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/shaizi.png</file>
+        <file>images/joystick_rule.jpg</file>
+        <file>images/tubiao.png</file>
+        <file>images/xuanwu.png</file>
+        <file>images/tubiao.ico</file>
+        <file>images/zju-rai-xuanwu.png</file>
+        <file>images/camera1.png</file>
+        <file>images/camera2.png</file>
+        <file>images/sonar.png</file>
+    </qresource>
+    <qresource prefix="/config">
+        <file>config/ctable.bin</file>
+        <file>config/rovClientConfig.json</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>net-camera.qml</file>
+    </qresource>
+</RCC>
