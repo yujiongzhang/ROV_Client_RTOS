@@ -152,9 +152,17 @@ void MainWindow::uiInit()
     ui->sonar_OFF->setEnabled(false);
     ui->camera_detection_OFF->setEnabled(false);
     ui->camera_is_main_button->setEnabled(false);
+
+    ui->AltHoldModeON->setEnabled(true);
+    ui->AltHoldModeOFF->setEnabled(false);
+    ui->set_depth_target->setEnabled(false);
+    ui->AttHoldModeON->setEnabled(true);
+    ui->AttHoldModeOFF->setEnabled(false);
+
     ui->status_label->setText("未连接：没有接收到ROV的消息");
     ui->steering_gear_angle_label->setText(QString::number(ui->steering_gear_angle->value()));
     ui->brightness_label->setText("0");
+    ui->depth_target->setText("0");
 
     //---模型形态---------
     ui->openGLWidget->set_viewat(QVector3D(0.0f, -1.3f, 0.3f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,0.0f,1.0f));
@@ -186,6 +194,9 @@ void MainWindow::paramInit()
     light_on = 0;
     camera_status = 0;
     speed_adjust = SPEED_ADJUST_COMMON;
+    rovstate_pre = 0;
+    depth_hold_on = 0;
+    alltitude_hold_on = 0;
 }
 
 void MainWindow::on_connectServer_clicked()
@@ -315,31 +326,93 @@ void MainWindow::process_ROV_status(Robot_status_DATA f_robot_status_data)
 // ROV 运动状态更新
 void MainWindow::update_status(uint8_t run_mode)
 {
-    switch (run_mode) {
-    case 0 :
-        ui->status_label->setText("无力模式");
-        break;
-    case 1 :
-        ui->status_label->setText("开环模式");
-        break;
-    case 2 :
-        ui->status_label->setText("只开定深");
-        break;
-    case 3 :
-        ui->status_label->setText("只开定艏");
-        break;
-    case 4 :
-        ui->status_label->setText("定深定艏都开");
-        break;
-    case 5 :
-        ui->status_label->setText("贴壁爬行（竖推工作）");
-        break;
-    case 6 :
-        ui->status_label->setText("陆地爬行（竖推不工作）");
-        break;
-    case 7 :
-        ui->status_label->setText("停止模式，稳定当前状态，进行作业（暂不开发）");
-        break;
+    if(rovstate_pre != run_mode){
+        switch (run_mode) {
+        case 0 :
+            ui->status_label->setText("无力模式");
+            depth_hold_on = 0;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(true);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(true);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        case 1 :
+            ui->status_label->setText("开环模式");
+            depth_hold_on = 0;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(true);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(true);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        case 2 :
+            ui->status_label->setText("只开定深");
+            depth_hold_on = 1;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(false);
+            ui->AltHoldModeOFF->setEnabled(true);
+            ui->set_depth_target->setEnabled(true);
+            ui->AttHoldModeON->setEnabled(true);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        case 3 :
+            ui->status_label->setText("只开定艏");
+            ui->status_label->setText("无力模式");
+            depth_hold_on = 0;
+            alltitude_hold_on = 1;
+            ui->AltHoldModeON->setEnabled(true);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(false);
+            ui->AttHoldModeOFF->setEnabled(true);
+            break;
+        case 4 :
+            ui->status_label->setText("定深定艏都开");
+            depth_hold_on = 1;
+            alltitude_hold_on = 1;
+            ui->AltHoldModeON->setEnabled(false);
+            ui->AltHoldModeOFF->setEnabled(true);
+            ui->set_depth_target->setEnabled(true);
+            ui->AttHoldModeON->setEnabled(false);
+            ui->AttHoldModeOFF->setEnabled(true);
+            break;
+        case 5 :
+            ui->status_label->setText("贴壁爬行（竖推工作）");
+            depth_hold_on = 0;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(false);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(false);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        case 6 :
+            ui->status_label->setText("陆地爬行（竖推不工作）");
+            depth_hold_on = 0;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(false);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(false);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        case 7 :
+            ui->status_label->setText("停止模式，稳定当前状态，进行作业（暂不开发）");
+            depth_hold_on = 0;
+            alltitude_hold_on = 0;
+            ui->AltHoldModeON->setEnabled(false);
+            ui->AltHoldModeOFF->setEnabled(false);
+            ui->set_depth_target->setEnabled(false);
+            ui->AttHoldModeON->setEnabled(false);
+            ui->AttHoldModeOFF->setEnabled(false);
+            break;
+        }
+
+    }
+    else{
 
     }
 
@@ -362,7 +435,8 @@ void MainWindow::process_ROV_txtmsg(char* msg)
     memset(msg,0,200);
 }
 
-//------------ui按钮------------------------------
+//-------------------------------------------
+//----------- ui按钮 -----------------------------
 void MainWindow::on_lightON_clicked()
 {
     light_on = 1;
@@ -379,6 +453,12 @@ void MainWindow::on_lightOFF_clicked()
     ui->lightOFF->setEnabled(false);
     emit s_brightness(0);
     ui->brightness_label->setText("0");
+}
+
+void MainWindow::on_set_depth_target_clicked()
+{
+    float target_depth_value = ui->depth_target->text().toFloat();
+    emit s_target_depth(target_depth_value);
 }
 
 void MainWindow::on_brightness_sliderReleased()
@@ -456,6 +536,7 @@ void MainWindow::open_worker1_connects()
     connect(ui->AltHoldModeOFF, &QToolButton::clicked,worker,sendMsgUp);
     connect(this,&MainWindow::s_brightness,worker,&sendfile::sendMsgBrightnessSet);//设置灯的亮度
     connect(this,&MainWindow::s_servo_angle,worker,&sendfile::sendMsgServoAngle);//设置舵机角度
+    connect(this,&MainWindow::s_target_depth,worker,&sendfile::sendMsgTargetDepth);//设置深度
 }
 
 void MainWindow::close_worker1_connects()
@@ -583,6 +664,11 @@ void MainWindow::on_sonar_OFF_clicked()
     ui->sonar->set_default_picture(QImage(":/images/images/sonar.png"));
 }
 
+void MainWindow::on_sonar_Recode_clicked()
+{
+    ui->sonar->take_one_photo();
+}
+
 
 
 
@@ -695,5 +781,4 @@ void MainWindow::on_camera2_is_main_button_clicked()
 
     camera_status = 1;
 }
-
 

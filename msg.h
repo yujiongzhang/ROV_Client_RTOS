@@ -141,6 +141,12 @@ struct PIDs_set_DATA
     PID_set roll_angular_velocity_pid;        	//roll angular velocity PID.Roll角速度pid
 };
 
+
+struct target_control_cmd_DATA
+{
+    float target_depth;
+};
+
 //------------------------------------------------
 
 //----封装数据（交流）包，由帧头部分+数据部分组成，有协议确定并规范-------

@@ -1,4 +1,3 @@
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -36,6 +35,7 @@ signals:
     void rev_key1(double t,double mun);
     void s_brightness(int value);
     void s_servo_angle(int8_t value);
+    void s_target_depth(float value);
 
 private slots:
     void on_connectServer_clicked();
@@ -99,6 +99,11 @@ private slots:
 
     void on_camera2_is_main_button_clicked();
 
+    void on_set_depth_target_clicked();
+
+
+    void on_sonar_Recode_clicked();
+
 private:
     Ui::MainWindow *ui;
     startPlot * my_plot;
@@ -119,6 +124,9 @@ private:
 
     int light_on;
     int camera_status;//0 表示 主视相机在主显示区 || 1 表示 检测相机在主显示区 || 2 表示 声纳在主显示区
+    int rovstate_pre; //记录上一次收到的ROV状态
+    int depth_hold_on;//0 表示 未开定深 || 1 表示 开启定深
+    int alltitude_hold_on; //0 表示 未开定艏 || 1 表示 开启定艏
 
     void uiInit();//初始化ui上的一些值
     void paramInit();//初始化Mainwindow中的参数值

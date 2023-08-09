@@ -12,6 +12,7 @@ static ROVComuPacket ROV2PCComu; //创建接收ROV数据上传的数据包
 static ROVComuPacket PC2ROVComu; //创建下发指令的数据包
 static struct Robot_status_DATA robot_status_data; //表示机器人状态的DATA中的结构体
 static struct motion_control_cmd_DATA motion_control_cmd_data; //下发运动指令的DATA中的结构体,并初始化
+static struct target_control_cmd_DATA target_control_cmd_data; //下发控制目标指令的结构体
 
 static int speed_adjust;
 
@@ -52,6 +53,7 @@ public:
     void sendMsgUp();
     void sendMsgBrightnessSet(int value);
     void sendMsgServoAngle(int8_t value);
+    void sendMsgTargetDepth(float value);
 
     void sendMsgPID(PIDs_set_DATA value);
 

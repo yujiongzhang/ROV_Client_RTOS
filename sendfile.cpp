@@ -17,6 +17,7 @@ sendfile::sendfile(QObject *parent) : QObject(parent)
 {
     PC2ROVComu.header = 0xA5;
     motion_control_cmd_data = {0,0,0,0,0,0,0,0,0};
+    target_control_cmd_data = {0};
     qRegisterMetaType<msg_attitude>("msg_attitude");//跨线程的信号和槽的参数传递中,参数的类型是自定义的类型
     qRegisterMetaType<Robot_status_DATA>("Robot_status_DATA");//在跨线程的信号和槽的参数传递中, 参数的类型是自定义的类型，需要注册一下
 }
@@ -330,6 +331,16 @@ void sendfile::sendMsgServoAngle(int8_t value)
     send_TcpData(1);//发送消息类型为1
 }
 
+void sendfile::sendMsgTargetDepth(float value)
+{
+    qDebug()<<" set target depth: "<<value;
+    target_control_cmd_data.target_depth = value;
+
+    set_PC2ROVComu(3,(char*)(&target_control_cmd_data),sizeof (target_control_cmd_data));
+    send_TcpData(3);
+
+}
+
 //----------------------------------------------------------------
 // ------------以下为封装下发指令（ PC -> ROV ）的相关函数-------------
 //----------------------------------------------------------------
@@ -350,6 +361,7 @@ void sendfile::set_PC2ROVComu(uint8_t msg_type, char* dataPtr, int datalen)
 //往 socket 中写入 PC2ROVComu 结构体。参数：消息类型
 //msg_type = 1时，发送运动控制指令
 //msg_type=2时，发送PID设置指令
+//msg_type=3时，发送控制目标指令
 void sendfile::send_TcpData(uint8_t msg_type)
 {
     if(msg_type == 1)
@@ -367,6 +379,14 @@ void sendfile::send_TcpData(uint8_t msg_type)
         sendTcpData.resize(sizeof(PIDs_set_DATA)+7);                   // sendTcpData 根据数据类型调整大小
         memcpy(sendTcpData.data(),&PC2ROVComu,sizeof(PIDs_set_DATA)+5);//把PC2ROVComu中的所有内容发送给sendTcpData
         memcpy(sendTcpData.data()+sizeof(PIDs_set_DATA)+5,&PC2ROVComu.CRC16,2);//把PC2ROVComu中的所有内容发送给sendTcpData
+        m_tcp->write(sendTcpData);                //发送
+        sendTcpData.clear();
+    }
+    else if(msg_type == 3)
+    {
+        sendTcpData.resize(sizeof(target_control_cmd_DATA)+7);                   // sendTcpData 根据数据类型调整大小
+        memcpy(sendTcpData.data(),&PC2ROVComu,sizeof(target_control_cmd_DATA)+5);//把PC2ROVComu中的所有内容发送给sendTcpData
+        memcpy(sendTcpData.data()+sizeof(target_control_cmd_DATA)+5,&PC2ROVComu.CRC16,2);//把PC2ROVComu中的所有内容发送给sendTcpData
         m_tcp->write(sendTcpData);                //发送
         sendTcpData.clear();
     }
