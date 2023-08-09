@@ -25,6 +25,7 @@ SOURCES += \
     help.cpp \
     hms2000.cpp \
     hms2000_thread.cpp \
+    ispingable.cpp \
     joystickrule.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     help.h \
     hms2000.h \
     hms2000_thread.h \
+    ispingable.h \
     joystickrule.h \
     mainwindow.h \
     msg.h \

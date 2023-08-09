@@ -409,10 +409,11 @@ void FFmpegWidget::setUrl(const QString &url)
 void FFmpegWidget::open()
 {
     //qDebug() << TIMEMS << "open video" << objectName();
-    clear();
 
+    clear();
     thread->play();
     thread->start();
+
 }
 
 void FFmpegWidget::pause()

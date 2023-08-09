@@ -7,6 +7,7 @@
 #endif
 
 #include "ffmpeghead.h"
+#include "ispingable.h"
 
 class FFmpegThread : public QThread
 {
@@ -14,6 +15,8 @@ class FFmpegThread : public QThread
 public:
     explicit FFmpegThread(QObject *parent = 0);
     static void initlib();
+
+    QString url;                    //视频流地址
 
 protected:
     void run();
@@ -30,7 +33,7 @@ private:
     int videoStreamIndex;           //视频流索引
     int audioStreamIndex;           //音频流索引
 
-    QString url;                    //视频流地址
+
 
     uint8_t *buffer;                //存储解码后图片buffer
     AVPacket *avPacket;             //包对象

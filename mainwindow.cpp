@@ -580,12 +580,17 @@ void MainWindow::on_cameraON_clicked()
 
 
     QString url1 = camera1_urls.trimmed();
-    ui->camera->setUrl(url1);
-    ui->camera->open();
+    std::string url1_ip = url1.toStdString().substr(7,13);
 
-    ui->cameraON->setEnabled(false);
-    ui->cameraOFF->setEnabled(true);
-
+    if(isPingable(url1_ip.c_str())){
+        ui->camera->setUrl(url1);
+        ui->camera->open();
+        ui->cameraON->setEnabled(false);
+        ui->cameraOFF->setEnabled(true);
+    }
+    else{
+        QMessageBox::information(this,"摄像探头未连接","未能找到摄像探头%s"+url1,"好吧TAT，我检查一下连线和rtsp地址");
+    }
 }
 
 void MainWindow::on_cameraOFF_clicked()
@@ -599,11 +604,17 @@ void MainWindow::on_cameraOFF_clicked()
 void MainWindow::on_camera_detection_ON_clicked()
 {
     QString url2 = camera2_urls.trimmed();
-    ui->camera_2->setUrl(url2);
-    ui->camera_2->open();
+    std::string url2_ip = url2.toStdString().substr(7,12);
 
-    ui->camera_detection_ON->setEnabled(false);
-    ui->camera_detection_OFF->setEnabled(true);
+    if(isPingable(url2_ip.c_str())){
+        ui->camera_2->setUrl(url2);
+        ui->camera_2->open();
+        ui->camera_detection_ON->setEnabled(false);
+        ui->camera_detection_OFF->setEnabled(true);
+    }
+    else{
+        QMessageBox::information(this,"摄像探头未连接","未能找到摄像头:"+url2,"好吧TAT，我检查一下连线和rtsp地址");
+    }
 }
 
 void MainWindow::on_camera_detection_OFF_clicked()
