@@ -132,7 +132,7 @@ void hms2000_thread::process_receive_data()
     {
         out<<outbuf[i]<<" ";
     }
-    out<<endl;
+    out<<Qt::endl;
     out.flush();
     hmsfile.close();
     //qDebug()<<arr.data();

@@ -32,7 +32,7 @@ void AXBOpenGLWidget::set_viewat(QVector3D _camera_position, QVector3D _camera_f
 
 void AXBOpenGLWidget::drawShape(float _pitch,float _roll, float _yaw)
 {
-//   qDebug()<<"drawShape"<<endl;
+//   qDebug()<<"drawShape";
 //   qDebug()<<msg.THR;
 //   qDebug()<<msg.YAW;
 //   qDebug()<<msg.ROL;
@@ -64,7 +64,7 @@ QVector<float> AXBOpenGLWidget::loadAscllStl(QString filename,int ratio)
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Open stl_file failed." << endl;
+        qDebug() << "Open stl_file failed." ;
     }
     while (!file.atEnd())
     {
