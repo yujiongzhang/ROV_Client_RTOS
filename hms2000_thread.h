@@ -11,6 +11,10 @@
 #include <QFile>
 #include <QUdpSocket>
 #include "definition.h"
+#include "msg.h"
+
+
+#include <QtWidgets>
 
 
 class hms2000_thread : public QThread
@@ -37,12 +41,16 @@ public:
     void start_sonar();
     void stop_sonar();
 
+    void set_sonar_config(Sonar_set msg);
+
 protected:
     void run();
 
 private:
     volatile bool isPlay;           //播放视频标志位
     volatile bool stopped;
+    volatile bool isRecode; //数据记录标志位
+
     int deviceID;
 
     QUdpSocket *m_udp;
@@ -92,6 +100,8 @@ public slots:
     void set(QString sonar_add, quint16 sonar_port);
     void play();
     void stop();
+    void startRecode();
+    void stopRecode();
 };
 
 

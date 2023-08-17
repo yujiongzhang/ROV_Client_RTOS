@@ -38,6 +38,22 @@ void Hms2000::take_one_photo()
     this->image.save(QString("./sonar%1.png").arg(QTime::currentTime().toString("HH_mm_ss")),"PNG",-1);
 }
 
+void Hms2000::set_sonar_config(Sonar_set msg)
+{
+    qDebug()<< "set sonar config";
+    my_hms2000_thread->set_sonar_config(msg);
+}
+
+void Hms2000::start_recode()
+{
+    my_hms2000_thread->startRecode();
+}
+
+void Hms2000::stop_recode()
+{
+    my_hms2000_thread->stopRecode();
+}
+
 void Hms2000::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

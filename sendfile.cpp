@@ -352,10 +352,10 @@ void sendfile::set_PC2ROVComu(uint8_t msg_type, char* dataPtr, int datalen)
     PC2ROVComu.msg_type = msg_type;                     //消息类型
     PC2ROVComu.dlen = datalen; //DATA的长度设置
     PC2ROVComu.CRC8 = get_CRC8_check_sum((unsigned char *)(&PC2ROVComu),4,0xFF); //帧头部分校验码
-    qDebug()<<"CRC8:"<<PC2ROVComu.CRC8;
+//    qDebug()<<"CRC8:"<<PC2ROVComu.CRC8;
     memcpy(PC2ROVComu.buff,dataPtr,datalen); //把motion_control_cmd_data中的内容给
     PC2ROVComu.CRC16 = get_CRC16_check_sum((unsigned char *)(&PC2ROVComu),datalen+5,0xFFFF);//DATA部分校验码
-    qDebug()<<"CRC16:"<<PC2ROVComu.CRC16;
+//    qDebug()<<"CRC16:"<<PC2ROVComu.CRC16;
 }
 
 //往 socket 中写入 PC2ROVComu 结构体。参数：消息类型
@@ -367,11 +367,11 @@ void sendfile::send_TcpData(uint8_t msg_type)
     if(msg_type == 1)
     {
         sendTcpData.resize(sizeof(motion_control_cmd_DATA)+7);                   // sendTcpData 根据数据类型调整大小
-        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
+//        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
         memcpy(sendTcpData.data(),&PC2ROVComu,sizeof(motion_control_cmd_DATA)+5);//把PC2ROVComu中的所有内容发送给sendTcpData
         memcpy(sendTcpData.data()+sizeof(motion_control_cmd_DATA)+5,&PC2ROVComu.CRC16,2);//把PC2ROVComu中的所有内容发送给sendTcpData
         m_tcp->write(sendTcpData);                //发送
-        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
+//        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
         sendTcpData.clear();
     }
     else if(msg_type == 2)
@@ -446,7 +446,7 @@ void sendfile::rev_TcpData()
 
     if(m_tcp->bytesAvailable() == 0)
     {
-        qDebug()<<"no msg";
+//        qDebug()<<"no msg";
         return;
     }
 
@@ -455,7 +455,7 @@ void sendfile::rev_TcpData()
         memcpy(&ROV2PCComu,header.data(),1);
         while(ROV2PCComu.header != 0xA5)
         {
-            qDebug()<<"header error";
+//            qDebug()<<"header error";
 
             if(m_tcp->bytesAvailable()>0){
                 header = m_tcp->read(1);
@@ -474,11 +474,11 @@ void sendfile::rev_TcpData()
 
         if(ROV2PCComu.CRC8 != CRC8_verify)
         {
-            qDebug()<<"CRC8 error";
+//            qDebug()<<"CRC8 error";
             return;
         }
         totalBytes = ROV2PCComu.dlen;
-        qDebug()<< "包头的长度"<< totalBytes;
+//        qDebug()<< "包头的长度"<< totalBytes;
     }
     else{
         return;
@@ -504,8 +504,8 @@ void sendfile::rev_TcpData()
                 QByteArray CRC16_verify_data = m_tcp->read(2);
                 memcpy(&CRC16_verify,CRC16_verify_data.data(),2);
 
-                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
-                qDebug()<<"CRC16_verify:"<<CRC16_verify;
+//                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
+//                qDebug()<<"CRC16_verify:"<<CRC16_verify;
 
                 if(ROV2PCComu.CRC16 == CRC16_verify)
                 {
@@ -513,13 +513,13 @@ void sendfile::rev_TcpData()
                 }
                 else
                 {
-                    qDebug()<<"CRC16 error";
+//                    qDebug()<<"CRC16 error";
                 }
 
                 //如果还有数据，继续下一个数据包
                 if(m_tcp->bytesAvailable()>0)
                 {
-                    qDebug()<<"开始递归调用。。。";
+//                    qDebug()<<"开始递归调用。。。";
                     rev_TcpData();
                 }
                 break;
@@ -534,8 +534,8 @@ void sendfile::rev_TcpData()
                 QByteArray CRC16_verify_data = m_tcp->read(2);
                 memcpy(&CRC16_verify,CRC16_verify_data.data(),2);
 
-                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
-                qDebug()<<"CRC16_verify:"<<CRC16_verify;
+//                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
+//                qDebug()<<"CRC16_verify:"<<CRC16_verify;
 
                 if(ROV2PCComu.CRC16 == CRC16_verify)
                 {
@@ -543,7 +543,7 @@ void sendfile::rev_TcpData()
                 }
                 else
                 {
-                    qDebug()<<"CRC16 error";
+//                    qDebug()<<"CRC16 error";
                 }
 
                 break;

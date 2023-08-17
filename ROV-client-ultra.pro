@@ -36,6 +36,7 @@ SOURCES += \
     qmotorlineedit.cpp \
     recodefile.cpp \
     sendfile.cpp \
+    sonarset.cpp \
     startplot.cpp \
     threadsafe_queue.cpp \
     zhifan.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     qmotorlineedit.h \
     recodefile.h \
     sendfile.h \
+    sonarset.h \
     startplot.h \
     threadsafe_queue.h \
     zhifan.h \
@@ -69,6 +71,7 @@ FORMS += \
     mainwindow.ui \
     navigation.ui \
     pidsets.ui \
+    sonarset.ui \
     startplot.ui \
     zhifan.ui
 

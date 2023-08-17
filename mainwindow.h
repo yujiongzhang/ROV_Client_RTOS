@@ -8,6 +8,7 @@
 #include "sendfile.h"
 #include "startplot.h"
 #include "pidsets.h"
+#include "sonarset.h"
 #include "recodefile.h"
 #include "joystickrule.h"
 #include <QVector>
@@ -104,11 +105,16 @@ private slots:
 
     void on_sonar_Recode_clicked();
 
+    void on_sonar_set_PushButton_clicked();
+
+    void on_sonar_recode_PushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     startPlot * my_plot;
     QTimer virtual_dataTimer;
     PIDSets * my_pidsets;
+    SonarSet* my_sonarsets;
     recodeFile * my_recodefile;
 
     QString camera1_urls;

@@ -9,6 +9,7 @@
 #include <QThread>
 
 #include"hms2000_thread.h"
+#include"msg.h"
 #include <QDebug>
 
 
@@ -25,6 +26,9 @@ public:
     void set_default_picture(QImage _image);
 
     void take_one_photo();
+    void set_sonar_config(Sonar_set msg);
+    void start_recode();
+    void stop_recode();
 
 protected:
     void paintEvent(QPaintEvent *);

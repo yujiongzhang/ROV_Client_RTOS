@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     qRegisterMetaType<int8_t>("int8_t");//跨线程的信号和槽的参数传递中,参数的类型是自定义的类型
+    qRegisterMetaType<Sonar_set>("Sonar_set");//跨线程的信号和槽的参数传递中,参数的类型是自定义的类型
     ui->setupUi(this);
 
     qDebug() << "主线程地址: " << QThread::currentThread();
@@ -681,6 +682,26 @@ void MainWindow::on_sonar_Recode_clicked()
 }
 
 
+//打开声纳配置界面
+void MainWindow::on_sonar_set_PushButton_clicked()
+{
+    my_sonarsets = new(SonarSet);
+    my_sonarsets->show();
+    connect(my_sonarsets,&SonarSet::s_sonar_set,ui->sonar,&Hms2000::set_sonar_config);
+}
+
+// 声纳数据记录与停止
+void MainWindow::on_sonar_recode_PushButton_clicked()
+{
+    if(ui->sonar_recode_PushButton->text() == "记录数据"){
+        ui->sonar->start_recode();
+        ui->sonar_recode_PushButton->setText("停止记录");
+    }
+    else{
+        ui->sonar->stop_recode();
+        ui->sonar_recode_PushButton->setText("记录数据");
+    }
+}
 
 
 //--------------------------------------------

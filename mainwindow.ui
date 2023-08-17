@@ -2012,7 +2012,7 @@ QPushButton::disabled{
                </property>
                <layout class="QGridLayout" name="gridLayout_13">
                 <item row="2" column="4">
-                 <widget class="QPushButton" name="pictureRecode_9">
+                 <widget class="QPushButton" name="sonar_recode_PushButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -2023,23 +2023,7 @@ QPushButton::disabled{
                    <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string>工作模式1</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="5">
-                 <widget class="QPushButton" name="sonar_Recode">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>拍照</string>
+                   <string>记录数据</string>
                   </property>
                  </widget>
                 </item>
@@ -2129,22 +2113,6 @@ QPushButton::disabled{
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="5">
-                 <widget class="QPushButton" name="pictureRecode_8">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>工作模式2</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="2" column="1">
                  <widget class="QPushButton" name="sonar_OFF">
                   <property name="sizePolicy">
@@ -2189,7 +2157,7 @@ QPushButton::disabled{
                  </widget>
                 </item>
                 <item row="3" column="4">
-                 <widget class="QPushButton" name="pictureRecode_2">
+                 <widget class="QPushButton" name="sonar_set_PushButton">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -2200,7 +2168,39 @@ QPushButton::disabled{
                    <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string>设置工作参数</string>
+                   <string>设置参数</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="5">
+                 <widget class="QPushButton" name="sonar_Recode">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string>拍照</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="5">
+                 <widget class="QPushButton" name="sonar_recodeON_PushButton_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string>备用</string>
                   </property>
                  </widget>
                 </item>

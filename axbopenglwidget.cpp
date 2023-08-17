@@ -171,7 +171,7 @@ void AXBOpenGLWidget::paintGL()
     shaderprogram.setUniformValue("model", model);
 
     int n = vertices.capacity()/sizeof(float);
-    qDebug() << n;
+//    qDebug() << n;
     QOpenGLVertexArrayObject::Binder bind(&VAO);//绑定VAO
     this->glDrawArrays(GL_TRIANGLES,0,n);
     }

@@ -6,6 +6,7 @@ hms2000_thread::hms2000_thread(QObject *parent): QThread(parent)
     qDebug()<<"创建 hms2000_thread";
     isPlay = false;
     stopped = false;
+    isRecode = false;
 
     image1 = new QImage(800, 700, QImage::Format_RGB32);
     image1->fill(Qt::white);
@@ -19,9 +20,7 @@ hms2000_thread::hms2000_thread(QObject *parent): QThread(parent)
     //绘制颜色表
     DrawColortable(m_pBits);
 
-    hmsfile.setFileName("hmsrecv.txt");
-    hmsfile.open(QIODevice::WriteOnly|QIODevice::Truncate); //以重写的方式先清空
-    hmsfile.close();
+
 
     //创建 QUdpSocket 对象
     m_udp = new QUdpSocket(this);
@@ -119,24 +118,29 @@ void hms2000_thread::process_receive_data()
     arr.resize(m_udp->bytesAvailable());
     int recvlen = arr.size();
     m_udp->readDatagram(arr.data(),recvlen); //接收
-    if(!hmsfile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))//Append以追加的方式
-    {
-        qDebug()<<"打开失败";
-    }
+
 //    uchar outbuf[recvlen];
      char *outbuf = new char[recvlen];
 
     memcpy(outbuf,arr.data(),recvlen);
-    QTextStream out(&hmsfile);
-    for(uint i=0; i<recvlen; i++)
-    {
-        out<<outbuf[i]<<" ";
-    }
-    out<<Qt::endl;
-    out.flush();
-    hmsfile.close();
+    if(isRecode){
+
+        if(!hmsfile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))//Append以追加的方式
+        {
+            qDebug()<<"打开失败";
+        }
+        QTextStream out(&hmsfile);
+        for(int i=0; i<recvlen; i++)
+        {
+            out<<outbuf[i]<<" ";
+        }
+        out<<Qt::endl;
+        out.flush();
+        hmsfile.close();
     //qDebug()<<arr.data();
     //qDebug()<<"实时数据流接收到了"<<recvlen;
+    }
+
 
     if(recvlen % ANSPKTSIZE == 0)
     {
@@ -287,6 +291,17 @@ void hms2000_thread::stop_sonar()
     m_udp->writeDatagram(sendbytearray,QHostAddress(connectAdd),connectPort); //发送
 }
 
+// 设置声纳参数
+void hms2000_thread::set_sonar_config(Sonar_set msg)
+{
+    simucmd.HMS2000.ucRange = msg.range;
+    simucmd.HMS2000.ucStartGain = msg.gain;
+    updateCheckSum();
+    sendbytearray.clear();
+    sendbytearray.append((char *)(&simucmd),sizeof(simucmd));
+    m_udp->writeDatagram(sendbytearray,QHostAddress(connectAdd),connectPort); //发送
+}
+
 void hms2000_thread::run()
 {
 
@@ -373,6 +388,22 @@ void hms2000_thread::play()
 void hms2000_thread::stop()
 {
     stopped = true;
+}
+
+void hms2000_thread::startRecode()
+{
+
+    hmsfile.setFileName(QString("./sonar%1.txt").arg(QTime::currentTime().toString("HH_mm_ss")));
+    hmsfile.open(QIODevice::WriteOnly|QIODevice::Truncate); //以重写的方式先清空
+    hmsfile.close();
+
+    this->isRecode = true;
+
+}
+
+void hms2000_thread::stopRecode()
+{
+    this->isRecode = false;
 }
 
 
