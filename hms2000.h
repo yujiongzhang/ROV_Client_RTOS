@@ -26,6 +26,7 @@ public:
     void set_default_picture(QImage _image);
 
     void take_one_photo();
+    void take_one_photo_origin();
     void set_sonar_config(Sonar_set msg);
     void start_recode();
     void stop_recode();

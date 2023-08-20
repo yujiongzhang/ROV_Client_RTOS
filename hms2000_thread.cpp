@@ -1,6 +1,29 @@
 #include "hms2000_thread.h"
 #include "definition.h"
 
+void saveMap2Txt(map<int,vector<int>> &m)
+{
+    QString filename = QString("./sonar/sonar%1.txt").arg(QTime::currentTime().toString("HH_mm_ss"));
+
+    ofstream ofs(filename.toStdString());
+
+    if (ofs.is_open()) {
+        qDebug() << "make file sucessfully";
+        for (map<int,vector<int>>::iterator it = m.begin(); it != m.end(); it++)
+        {
+            vector<int> tempPing = it->second;
+            for (vector<int>::iterator it_sub = tempPing.begin(); it_sub != tempPing.end(); it_sub++)
+            {
+                ofs<< *it_sub <<' ';
+            }
+            ofs << endl;
+        }
+        ofs.close();
+    } else {
+        qDebug() << "make file error" << filename;
+    }
+}
+
 hms2000_thread::hms2000_thread(QObject *parent): QThread(parent)
 {
     qDebug()<<"创建 hms2000_thread";
@@ -19,7 +42,6 @@ hms2000_thread::hms2000_thread(QObject *parent): QThread(parent)
 
     //绘制颜色表
     DrawColortable(m_pBits);
-
 
 
     //创建 QUdpSocket 对象
@@ -120,11 +142,10 @@ void hms2000_thread::process_receive_data()
     m_udp->readDatagram(arr.data(),recvlen); //接收
 
 //    uchar outbuf[recvlen];
-     char *outbuf = new char[recvlen];
+    uchar *outbuf = new uchar[recvlen];
 
     memcpy(outbuf,arr.data(),recvlen);
     if(isRecode){
-
         if(!hmsfile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))//Append以追加的方式
         {
             qDebug()<<"打开失败";
@@ -134,12 +155,30 @@ void hms2000_thread::process_receive_data()
         {
             out<<outbuf[i]<<" ";
         }
-        out<<Qt::endl;
+        out<<endl;
         out.flush();
         hmsfile.close();
-    //qDebug()<<arr.data();
-    //qDebug()<<"实时数据流接收到了"<<recvlen;
     }
+
+//    QByteArray arr;
+//    arr.resize(m_udp->bytesAvailable());
+//    int recvlen = arr.size();
+//    m_udp->readDatagram(arr.data(),recvlen); //接收
+//    if(!hmsfile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))//Append以追加的方式
+//    {
+//        qDebug()<<"打开失败";
+//    }
+//    uchar outbuf[recvlen];
+//    memcpy(outbuf,arr.data(),recvlen);
+//    QTextStream out(&hmsfile);
+//    for(int i=0; i<recvlen; i++)
+//    {
+//        out<<outbuf[i]<<" ";
+//    }
+//    out<<endl;
+//    out.flush();
+//    hmsfile.close();
+
 
 
     if(recvlen % ANSPKTSIZE == 0)
@@ -148,7 +187,7 @@ void hms2000_thread::process_receive_data()
         while (recvlen > 0)
         {
             char buf[ANSPKTSIZE];
-            memcpy(buf,arr.data()+cnt*ANSPKTSIZE,ANSPKTSIZE);
+            memcpy(buf,arr.data()+cnt*ANSPKTSIZE,ANSPKTSIZE);//把一ping的数据全部放进buf
             recvlen -= ANSPKTSIZE;
             cnt++;
 
@@ -184,14 +223,18 @@ void hms2000_thread::process_receive_data()
                 {
                 case Device_HMS2000:
                 {
+                    sonarPing.clear();
                     sonardatahms2000_in.data_len = (((anshead.ucDataHi&0x7f)<<7)|(anshead.ucDataLo&0x7f));
                     sonardatahms2000_in.glb_nAngle = (((anshead.ucAngleHi&0x7f)<<7)|(anshead.ucAngleLo&0x7f));
+                    sonarPing.push_back(sonardatahms2000_in.glb_nAngle);//防止stl中map 自己乱排序，先把角度值放进去
                     for(unsigned int i = 0;i < sonardatahms2000_in.data_len;i++)
                     {
                         sonardatahms2000_in.sonardata_hms2000[i] = buf[tail];
+                        sonarPing.push_back(buf[tail]);//用来保存单ping的原始数据
                         tail++;
                     }
                     q_sonardatahms2000.push(sonardatahms2000_in);
+                    sonarPingsMap[sonardatahms2000_in.glb_nAngle] = sonarPing;
                     q_sonardatahms2000_num++;
 
                     //qDebug()<<"处理了一个HMS2000包，数据区长度为："<<sonardatahms2000_in.data_len;
@@ -307,14 +350,6 @@ void hms2000_thread::run()
 
     qDebug()<<"hms2000_thread run";
 
-//    connect(cmdTimer, &QTimer::timeout,this,[=]()
-//    {
-//        if(!stopped){
-//            m_udp->writeDatagram(sendbytearray,QHostAddress(connectAdd),connectPort); //发送
-//            qDebug()<<"发送一次udp指令";
-//        }
-//    });
-
     connect(m_udp, &QUdpSocket::readyRead, this,&hms2000_thread::process_receive_data);
 
     while (!stopped) {
@@ -365,7 +400,6 @@ void hms2000_thread::run()
             emit receiveImage(*image1);
         }
 
-
     }
 
     //线程结束后释放资源
@@ -394,8 +428,6 @@ void hms2000_thread::startRecode()
 {
 
     hmsfile.setFileName(QString("./sonar%1.txt").arg(QTime::currentTime().toString("HH_mm_ss")));
-    hmsfile.open(QIODevice::WriteOnly|QIODevice::Truncate); //以重写的方式先清空
-    hmsfile.close();
 
     this->isRecode = true;
 
@@ -405,6 +437,13 @@ void hms2000_thread::stopRecode()
 {
     this->isRecode = false;
 }
+
+void hms2000_thread::take_photo_origin()
+{
+     saveMap2Txt(this->sonarPingsMap);
+}
+
+
 
 
 

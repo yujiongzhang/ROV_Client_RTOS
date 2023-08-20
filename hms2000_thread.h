@@ -13,9 +13,13 @@
 #include "definition.h"
 #include "msg.h"
 
+#include <map>
+#include <vector>
+#include <fstream>
 
 #include <QtWidgets>
 
+void saveMap2Txt(map<int,vector<int>> &m);
 
 class hms2000_thread : public QThread
 {
@@ -59,6 +63,9 @@ private:
     QImage* image1;
     QRgb *m_pBits;//指向图像的像素点
 
+    map<int,vector<int>> sonarPingsMap;
+    vector<int> sonarPing;
+
     QTimer * cmdTimer;
 
 
@@ -86,7 +93,7 @@ private:
     uchar hms_midBuf[HMSPPIDATASIZE];
     int m_nAngle; //1~588 一次+1  n表示int, 声纳上传的angle，不为实际角度
     int m_nLastAngle;  //初始化为-1，记录上次glb_nAngle
-    int m_nMaxAngle;//初始化为588
+    int m_nMaxAngle;//初始化为588 hms2000声纳硬件决定
     double m_angle;
     double m_scan_step;
 
@@ -102,6 +109,7 @@ public slots:
     void stop();
     void startRecode();
     void stopRecode();
+    void take_photo_origin();
 };
 
 

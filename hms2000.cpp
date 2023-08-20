@@ -35,7 +35,12 @@ void Hms2000::set_default_picture(QImage _image)
 
 void Hms2000::take_one_photo()
 {
-    this->image.save(QString("./sonar%1.png").arg(QTime::currentTime().toString("HH_mm_ss")),"PNG",-1);
+    this->image.save(QString("./sonar/sonar%1.png").arg(QTime::currentTime().toString("HH_mm_ss")),"PNG",-1);
+}
+
+void Hms2000::take_one_photo_origin()
+{
+    this->my_hms2000_thread->take_photo_origin();
 }
 
 void Hms2000::set_sonar_config(Sonar_set msg)

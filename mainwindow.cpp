@@ -679,6 +679,7 @@ void MainWindow::on_sonar_OFF_clicked()
 void MainWindow::on_sonar_Recode_clicked()
 {
     ui->sonar->take_one_photo();
+    ui->sonar->take_one_photo_origin();
 }
 
 

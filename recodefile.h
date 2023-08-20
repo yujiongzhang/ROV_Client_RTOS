@@ -5,6 +5,8 @@
 #include <QtDebug>
 #include "msg.h"
 #include<QTime>
+#include <fstream>
+
 
 class recodeFile : public QObject
 {
@@ -20,6 +22,8 @@ signals:
 
 private:
     FILE* fp;
+    QString filename;
+    std::ofstream ofs;
 
 };
 
