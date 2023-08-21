@@ -5,6 +5,7 @@
 #include <QtDebug>
 #include "msg.h"
 #include<QTime>
+#include<QDate>
 #include <fstream>
 
 

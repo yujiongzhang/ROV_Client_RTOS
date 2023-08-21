@@ -65,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(worker2,&sendfile::connectOK,this,[=](){
         QMessageBox::information(this,"服务器连接","端口2已经成功连接了服务器，恭喜！");
         ui->connectServer_2->setEnabled(false);
+        ui->status_label->setText("无力模式");
     });
     connect(worker2,&sendfile::gameover,this,[=](){
 //        t3->quit();
@@ -164,6 +165,7 @@ void MainWindow::uiInit()
     ui->steering_gear_angle_label->setText(QString::number(ui->steering_gear_angle->value()));
     ui->brightness_label->setText("0");
     ui->depth_target->setText("0");
+    ui->attitude_target->setText("0");
 
     //---模型形态---------
     ui->openGLWidget->set_viewat(QVector3D(0.0f, -1.3f, 0.3f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,0.0f,1.0f));
@@ -214,7 +216,8 @@ void MainWindow::on_connectServer_2_clicked()
     emit startConnect2(port2,ip2);
 }
 
-
+//---------------------------------------------------------------
+//-------------  工具栏  -----------------------------------------
 
 void MainWindow::on_actionstartPlot_triggered()
 {
@@ -255,7 +258,6 @@ void MainWindow::on_actionrecodefile_triggered()
         my_recodefile->moveToThread(t_recode);
         t_recode->start();
         connect(this->worker2,&sendfile::s_ROV_status,my_recodefile,&recodeFile::writeRecode);// 画图窗口处理 接收到的1类消息
-
         ui->actionrecodefile->setText("stop recode");
     }
     else if(ui->actionrecodefile->text() == "stop recode")
@@ -263,8 +265,10 @@ void MainWindow::on_actionrecodefile_triggered()
         my_recodefile->deleteLater();
         ui->actionrecodefile->setText("recodefile");
     }
-
 }
+
+//-------------  工具栏  -------------------------------------
+//-----------------------------------------------------------
 
 void MainWindow::virtualtimeDataSlot()//通过时间来创建一个虚拟的模拟下位机上传
 {
@@ -334,10 +338,15 @@ void MainWindow::update_status(uint8_t run_mode)
             depth_hold_on = 0;
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(true);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(true);
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
             break;
         case 1 :
             ui->status_label->setText("开环模式");
@@ -348,37 +357,48 @@ void MainWindow::update_status(uint8_t run_mode)
             ui->set_depth_target->setEnabled(false);
             ui->AttHoldModeON->setEnabled(true);
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             break;
         case 2 :
             ui->status_label->setText("只开定深");
             depth_hold_on = 1;
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AltHoldModeOFF->setEnabled(true);
             ui->set_depth_target->setEnabled(true);
             ui->AttHoldModeON->setEnabled(true);
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             break;
         case 3 :
             ui->status_label->setText("只开定艏");
-            ui->status_label->setText("无力模式");
             depth_hold_on = 0;
             alltitude_hold_on = 1;
             ui->AltHoldModeON->setEnabled(true);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AltHoldModeOFF->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
             ui->AttHoldModeON->setEnabled(false);
+            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AttHoldModeOFF->setEnabled(true);
+            ui->set_attitude_target->setEnabled(true);
             break;
         case 4 :
             ui->status_label->setText("定深定艏都开");
             depth_hold_on = 1;
             alltitude_hold_on = 1;
             ui->AltHoldModeON->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AltHoldModeOFF->setEnabled(true);
             ui->set_depth_target->setEnabled(true);
             ui->AttHoldModeON->setEnabled(false);
+            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AttHoldModeOFF->setEnabled(true);
+            ui->set_attitude_target->setEnabled(true);
             break;
         case 5 :
             ui->status_label->setText("贴壁爬行（竖推工作）");
@@ -389,6 +409,9 @@ void MainWindow::update_status(uint8_t run_mode)
             ui->set_depth_target->setEnabled(false);
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             break;
         case 6 :
             ui->status_label->setText("陆地爬行（竖推不工作）");
@@ -399,6 +422,9 @@ void MainWindow::update_status(uint8_t run_mode)
             ui->set_depth_target->setEnabled(false);
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             break;
         case 7 :
             ui->status_label->setText("停止模式，稳定当前状态，进行作业（暂不开发）");
@@ -409,13 +435,16 @@ void MainWindow::update_status(uint8_t run_mode)
             ui->set_depth_target->setEnabled(false);
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             break;
         }
-
     }
     else{
 
     }
+    rovstate_pre = run_mode;
 
 }
 
@@ -460,6 +489,12 @@ void MainWindow::on_set_depth_target_clicked()
 {
     float target_depth_value = ui->depth_target->text().toFloat();
     emit s_target_depth(target_depth_value);
+}
+
+void MainWindow::on_set_attitude_target_clicked()
+{
+    float target_attitude_value = ui->attitude_target->text().toFloat();
+    emit s_target_attitude(target_attitude_value);
 }
 
 void MainWindow::on_brightness_sliderReleased()
@@ -535,9 +570,12 @@ void MainWindow::open_worker1_connects()
     void (sendfile:: * sendMsgUp)() = &sendfile::sendMsgUp;//解决槽函数中sendMsgY函数重载，创建一个函数指针用于保存指定的函数地址
     connect(ui->AltHoldModeON, &QAbstractButton::clicked,worker,sendMsgY);
     connect(ui->AltHoldModeOFF, &QToolButton::clicked,worker,sendMsgUp);
+    connect(ui->AttHoldModeON, &QAbstractButton::clicked,worker,&sendfile::sendMsgAttHoldON);
+    connect(ui->AttHoldModeOFF,&QAbstractButton::clicked,worker,&sendfile::sendMsgAttHoldOFF);
     connect(this,&MainWindow::s_brightness,worker,&sendfile::sendMsgBrightnessSet);//设置灯的亮度
     connect(this,&MainWindow::s_servo_angle,worker,&sendfile::sendMsgServoAngle);//设置舵机角度
-    connect(this,&MainWindow::s_target_depth,worker,&sendfile::sendMsgTargetDepth);//设置深度
+    connect(this,&MainWindow::s_target_depth,worker,&sendfile::sendMsgTargetDepth);//设置目标深度
+    connect(this,&MainWindow::s_target_attitude,worker,&sendfile::sendMsgTargetAttitude);//设置目标高度
 }
 
 void MainWindow::close_worker1_connects()
@@ -565,8 +603,12 @@ void MainWindow::close_worker1_connects()
     void (sendfile:: * sendMsgUp)() = &sendfile::sendMsgUp;//解决槽函数中sendMsgY函数重载，创建一个函数指针用于保存指定的函数地址
     disconnect(ui->AltHoldModeON, &QAbstractButton::clicked,worker,sendMsgY);
     disconnect(ui->AltHoldModeOFF, &QToolButton::clicked,worker,sendMsgUp);
+    disconnect(ui->AttHoldModeON, &QAbstractButton::clicked,worker,&sendfile::sendMsgAttHoldON);
+    disconnect(ui->AttHoldModeOFF,&QAbstractButton::clicked,worker,&sendfile::sendMsgAttHoldOFF);
     disconnect(this,&MainWindow::s_brightness,worker,&sendfile::sendMsgBrightnessSet);//设置灯的亮度
     disconnect(this,&MainWindow::s_servo_angle,worker,&sendfile::sendMsgServoAngle);//设置舵机角度
+    disconnect(this,&MainWindow::s_target_depth,worker,&sendfile::sendMsgTargetDepth);//设置目标深度
+    disconnect(this,&MainWindow::s_target_attitude,worker,&sendfile::sendMsgTargetAttitude);//设置目标高度
 }
 
 
@@ -814,4 +856,7 @@ void MainWindow::on_camera2_is_main_button_clicked()
 
     camera_status = 1;
 }
+
+
+
 

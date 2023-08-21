@@ -304,6 +304,40 @@ void sendfile::sendMsgUp()
 
 }
 
+void sendfile::sendMsgAttHoldON()
+{
+    qDebug() <<  "开启定艏";
+
+    if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 1 )
+    {
+        motion_control_cmd_data.ModeType = 3;
+     }
+    else if(motion_control_cmd_data.ModeType == 2)
+    {
+        motion_control_cmd_data.ModeType = 4;
+    }
+
+    set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
+    send_TcpData(1);//发送消息类型为1
+}
+
+void sendfile::sendMsgAttHoldOFF()
+{
+    qDebug() << "关闭定艏" ;
+
+    if(motion_control_cmd_data.ModeType == 3 )
+    {
+        motion_control_cmd_data.ModeType = 1;
+     }
+    else if(motion_control_cmd_data.ModeType == 4)
+    {
+        motion_control_cmd_data.ModeType = 2;
+    }
+
+    set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
+    send_TcpData(1);//发送消息类型为1
+}
+
 void sendfile::sendMsgPID(PIDs_set_DATA value)
 {
     qDebug() << "Seting PID" ;
@@ -339,6 +373,14 @@ void sendfile::sendMsgTargetDepth(float value)
     set_PC2ROVComu(3,(char*)(&target_control_cmd_data),sizeof (target_control_cmd_data));
     send_TcpData(3);
 
+}
+
+void sendfile::sendMsgTargetAttitude(float value)
+{
+    qDebug()<<" set target attitude: "<<value;
+    target_control_cmd_data.target_attitude = value;
+    set_PC2ROVComu(3,(char*)(&target_control_cmd_data),sizeof (target_control_cmd_data));
+    send_TcpData(3);
 }
 
 //----------------------------------------------------------------

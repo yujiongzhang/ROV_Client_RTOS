@@ -37,6 +37,7 @@ signals:
     void s_brightness(int value);
     void s_servo_angle(int8_t value);
     void s_target_depth(float value);
+    void s_target_attitude(float value);
 
 private slots:
     void on_connectServer_clicked();
@@ -101,6 +102,8 @@ private slots:
     void on_camera2_is_main_button_clicked();
 
     void on_set_depth_target_clicked();
+
+    void on_set_attitude_target_clicked();
 
 
     void on_sonar_Recode_clicked();

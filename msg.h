@@ -147,6 +147,7 @@ struct PIDs_set_DATA
 struct target_control_cmd_DATA
 {
     float target_depth;
+    float target_attitude;
 };
 
 //--------------- PC ->ROV ------------------------------------

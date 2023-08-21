@@ -301,8 +301,8 @@ font.bold : true</string>
              <string notr="true">QPushButton{
 	font: 10pt &quot;微软雅黑&quot;;
     color: #2f3640;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
+    background-color: #f5f690;
+    border-color: #2f3640;
     border-radius: 10px;
     border-style: solid;
     border-width: 2px;
@@ -322,10 +322,9 @@ QPushButton::pressed,QPushButton::checked{
 
 QPushButton::disabled{
     color: #FFFFFF;
-    background-color: #EE1111;
-    border-color: #FF0000;
-}
-</string>
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
             </property>
             <property name="text">
              <string>开启定深</string>
@@ -401,7 +400,7 @@ QPushButton::disabled{
          <property name="title">
           <string>惯导</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0">
+         <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0">
           <property name="spacing">
            <number>2</number>
           </property>
@@ -432,6 +431,167 @@ QPushButton::disabled{
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>pit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>gx </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>rol</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QLineEdit" name="rol">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="pit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>az </string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_23">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>gy </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="10">
+              <widget class="QPushButton" name="AttHoldModeON">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+               </property>
+               <property name="text">
+                <string>开启稳姿</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_16">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>ay </string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="gx">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="4">
+              <widget class="QLabel" name="label_25">
+               <property name="text">
+                <string>gz </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>yaw</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QLineEdit" name="az"/>
+             </item>
              <item row="1" column="10">
               <widget class="QPushButton" name="AttHoldModeOFF">
                <property name="sizePolicy">
@@ -474,111 +634,11 @@ QPushButton::disabled{
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>yaw</string>
-               </property>
-              </widget>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="ay"/>
              </item>
-             <item row="0" column="3">
-              <widget class="QLineEdit" name="pit">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="yaw">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_7">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>pit</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="4">
-              <widget class="QLabel" name="label_8">
-               <property name="text">
-                <string>rol</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="10">
-              <widget class="QPushButton" name="AttHoldModeON">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #EE1111;
-    border-color: #FF0000;
-}
-</string>
-               </property>
-               <property name="text">
-                <string>开启稳姿</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="5">
-              <widget class="QLineEdit" name="rol">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+             <item row="2" column="3">
+              <widget class="QLineEdit" name="gy"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_14">
@@ -603,80 +663,81 @@ QPushButton::disabled{
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="label_16">
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="yaw">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
-               </property>
-               <property name="text">
-                <string>ay </string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="ay"/>
-             </item>
-             <item row="1" column="4">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>az </string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="5">
-              <widget class="QLineEdit" name="az"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_15">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>gx </string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="gx">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QLabel" name="label_23">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>gy </string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="3">
-              <widget class="QLineEdit" name="gy"/>
-             </item>
-             <item row="2" column="4">
-              <widget class="QLabel" name="label_25">
-               <property name="text">
-                <string>gz </string>
                </property>
               </widget>
              </item>
              <item row="2" column="5">
               <widget class="QLineEdit" name="gz"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,2,1">
+             <item>
+              <widget class="QLabel" name="label_30">
+               <property name="text">
+                <string>目标yaw</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="attitude_target">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 0, 0);
+font.bold : true</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="set_attitude_target">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+               </property>
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

@@ -51,9 +51,12 @@ public:
     //ui按键信号到socket
     void sendMsgY();
     void sendMsgUp();
+    void sendMsgAttHoldON();
+    void sendMsgAttHoldOFF();
     void sendMsgBrightnessSet(int value);
     void sendMsgServoAngle(int8_t value);
     void sendMsgTargetDepth(float value);
+    void sendMsgTargetAttitude(float value);
 
     void sendMsgPID(PIDs_set_DATA value);
 
