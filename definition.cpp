@@ -67,7 +67,7 @@ void simu_cmd()
     simucmd.HMS2000.ucWorkStatus = 0x03;//正常扇扫
     //    simucmd.HMS2000.ucRange = 0x01; //{2,3,4,5,10,20,30,40,50,60}
 //    simucmd.HMS2000.ucRange = 0x03;
-    simucmd.HMS2000.ucRange = 0x01;
+    simucmd.HMS2000.ucRange = 0x02;
 
     //    simucmd.HMS2000.ucStartGain = 0x26;//0-40,高频默认30，低频默认20，高频38效果更好
     simucmd.HMS2000.ucStartGain = 36;
