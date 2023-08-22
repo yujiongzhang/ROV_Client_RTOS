@@ -837,15 +837,18 @@ QPushButton::disabled{
         <widget class="QWidget" name="widget_20" native="true">
          <property name="font">
           <font>
+           <family>Arial</family>
            <pointsize>10</pointsize>
-           <weight>50</weight>
+           <weight>75</weight>
            <italic>false</italic>
-           <bold>false</bold>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(255, 210, 0);
-font: 10pt setbold(true);</string>
+font-size: 10pt;
+font-weight: bold;
+font-family: Arial;</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
@@ -858,11 +861,11 @@ font: 10pt setbold(true);</string>
             </property>
             <property name="font">
              <font>
-              <family>Adobe 黑体 Std R</family>
+              <family>Arial</family>
               <pointsize>10</pointsize>
-              <weight>50</weight>
+              <weight>75</weight>
               <italic>false</italic>
-              <bold>false</bold>
+              <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
@@ -883,10 +886,11 @@ font: 10pt setbold(true);</string>
             </property>
             <property name="font">
              <font>
+              <family>Arial</family>
               <pointsize>10</pointsize>
-              <weight>50</weight>
+              <weight>75</weight>
               <italic>false</italic>
-              <bold>false</bold>
+              <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
@@ -1861,6 +1865,9 @@ QPushButton::disabled{
                 </item>
                 <item row="1" column="2">
                  <widget class="QPushButton" name="camera_detection_recode_2">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                     <horstretch>0</horstretch>
@@ -1877,6 +1884,9 @@ QPushButton::disabled{
                 </item>
                 <item row="1" column="3">
                  <widget class="QPushButton" name="HDvideo_3">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                     <horstretch>0</horstretch>
@@ -1982,6 +1992,9 @@ QPushButton::disabled{
                 </item>
                 <item row="3" column="2">
                  <widget class="QPushButton" name="videoRecodeON">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -2035,6 +2048,9 @@ QPushButton::disabled{
                 </item>
                 <item row="3" column="3">
                  <widget class="QPushButton" name="videoRecodeOFF">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -2074,6 +2090,9 @@ QPushButton::disabled{
                <layout class="QGridLayout" name="gridLayout_13">
                 <item row="2" column="4">
                  <widget class="QPushButton" name="sonar_recode_PushButton">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -2251,6 +2270,9 @@ QPushButton::disabled{
                 </item>
                 <item row="3" column="5">
                  <widget class="QPushButton" name="sonar_recodeON_PushButton_2">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>

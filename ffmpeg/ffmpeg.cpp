@@ -465,7 +465,7 @@ void FFmpegWidget::photos(const QImage &image)
 {
     if(isPhotos)
     {
-        image.save(QString("./picture%1.png").arg(QTime::currentTime().toString("HH_mm_ss")),"PNG",-1);
+        image.save(QString("./picture/picture_%1.png").arg(QDateTime::currentDateTime().toString("yyyy_MM_dd_HH_mm_ss_zzz")),"PNG",-1);
         isPhotos = false;
     }
     disconnect(thread, &FFmpegThread::receiveImage, this, &FFmpegWidget::photos);

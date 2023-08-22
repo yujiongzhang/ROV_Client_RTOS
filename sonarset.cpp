@@ -2,7 +2,7 @@
 #include "ui_sonarset.h"
 
 SonarSet::SonarSet(QWidget *parent) :
-    QMainWindow(parent),
+    QMainWindow(parent, Qt::Widget | Qt::WindowStaysOnTopHint),
     ui(new Ui::SonarSet)
 {
     ui->setupUi(this);

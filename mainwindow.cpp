@@ -656,7 +656,6 @@ void MainWindow::on_cameraON_clicked()
     // rtsp://192.168.1.168:8554/0
     // rtmp://192.168.1.168:1935/live/ls_00_0
 
-
     QString url1 = camera1_urls.trimmed();
     std::string url1_ip = url1.toStdString().substr(7,13);
 

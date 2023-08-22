@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
         path.mkdir("./recode");  // 使用mkdir来创建文件夹
         qDebug()<<"成功创建 recode 文件夹";
     }
+    if (!path.exists("./picture")) {
+        path.mkdir("./picture");
+        qDebug()<<"成功创建 picture 文件夹";
+    }
 
     QApplication a(argc, argv);
     MainWindow w;

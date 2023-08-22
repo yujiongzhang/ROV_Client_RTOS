@@ -7,14 +7,13 @@
 #include <QMessageBox>
 
 PIDSets::PIDSets(QWidget *parent) :
-    QMainWindow(parent),
+    QMainWindow(parent,Qt::Widget | Qt::WindowStaysOnTopHint),
     ui(new Ui::PIDSets)
 {
     ui->setupUi(this);
     qDebug() << "创建 PID 类" ;
-    this->setAttribute(Qt::WA_DeleteOnClose,true);
+    this->setAttribute(Qt::WA_DeleteOnClose,true);    //关闭窗口即delete该类
     qRegisterMetaType<PIDs_set_DATA>("PIDs_set_DATA");//在跨线程的信号和槽的参数传递中, 参数的类型是自定义的类型，需要注册一下
-
     this->PID_set_init();
 
 }
