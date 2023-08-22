@@ -155,17 +155,24 @@ void MainWindow::uiInit()
     ui->camera_detection_OFF->setEnabled(false);
     ui->camera_is_main_button->setEnabled(false);
 
+    //定深功能相关
     ui->AltHoldModeON->setEnabled(true);
     ui->AltHoldModeOFF->setEnabled(false);
+    ui->depth_target->setText("0");
+    ui->depth_target->setEnabled(false);
     ui->set_depth_target->setEnabled(false);
+    //定首功能相关
     ui->AttHoldModeON->setEnabled(true);
     ui->AttHoldModeOFF->setEnabled(false);
+    ui->attitude_target->setText("0");
+    ui->attitude_target->setEnabled(false);
+    ui->set_attitude_target->setEnabled(false);
 
     ui->status_label->setText("未连接：没有接收到ROV的消息");
     ui->steering_gear_angle_label->setText(QString::number(ui->steering_gear_angle->value()));
     ui->brightness_label->setText("0");
-    ui->depth_target->setText("0");
-    ui->attitude_target->setText("0");
+
+
 
     //---模型形态---------
     ui->openGLWidget->set_viewat(QVector3D(0.0f, -1.3f, 0.3f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,0.0f,1.0f));
@@ -331,21 +338,23 @@ void MainWindow::process_ROV_status(Robot_status_DATA f_robot_status_data)
 // ROV 运动状态更新
 void MainWindow::update_status(uint8_t run_mode)
 {
-    if(rovstate_pre != run_mode){
+    static int count = 0;
+    if(rovstate_pre != run_mode || count == 40){
         switch (run_mode) {
         case 0 :
             ui->status_label->setText("无力模式");
             depth_hold_on = 0;
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(true);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
 
             ui->AttHoldModeON->setEnabled(true);
-            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AttHoldModeOFF->setEnabled(false);
+            ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
             ui->set_attitude_target->setEnabled(false);
             break;
         case 1 :
@@ -354,50 +363,66 @@ void MainWindow::update_status(uint8_t run_mode)
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(true);
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(true);
             ui->AttHoldModeOFF->setEnabled(false);
-            ui->set_attitude_target->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
             break;
         case 2 :
             ui->status_label->setText("只开定深");
             depth_hold_on = 1;
             alltitude_hold_on = 0;
+
             ui->AltHoldModeON->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AltHoldModeOFF->setEnabled(true);
+            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
+            ui->depth_target->setEnabled(true);
             ui->set_depth_target->setEnabled(true);
+
             ui->AttHoldModeON->setEnabled(true);
             ui->AttHoldModeOFF->setEnabled(false);
-            ui->set_attitude_target->setEnabled(false);
             ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
+
             break;
         case 3 :
             ui->status_label->setText("只开定艏");
             depth_hold_on = 0;
             alltitude_hold_on = 1;
+
             ui->AltHoldModeON->setEnabled(true);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(false);
-            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AttHoldModeOFF->setEnabled(true);
+            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
+            ui->attitude_target->setEnabled(true);
             ui->set_attitude_target->setEnabled(true);
+
             break;
         case 4 :
             ui->status_label->setText("定深定艏都开");
             depth_hold_on = 1;
             alltitude_hold_on = 1;
             ui->AltHoldModeON->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AltHoldModeOFF->setEnabled(true);
+            ui->altitude->setStyleSheet("background-color: rgb(255, 16, 16)");
+            ui->depth_target->setEnabled(true);
             ui->set_depth_target->setEnabled(true);
+
             ui->AttHoldModeON->setEnabled(false);
-            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
             ui->AttHoldModeOFF->setEnabled(true);
+            ui->yaw->setStyleSheet("background-color: rgb(255, 16, 16)");
+            ui->attitude_target->setEnabled(true);
             ui->set_attitude_target->setEnabled(true);
             break;
         case 5 :
@@ -406,12 +431,15 @@ void MainWindow::update_status(uint8_t run_mode)
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(false);
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
-            ui->set_attitude_target->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
             break;
         case 6 :
             ui->status_label->setText("陆地爬行（竖推不工作）");
@@ -419,12 +447,15 @@ void MainWindow::update_status(uint8_t run_mode)
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(false);
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
-            ui->set_attitude_target->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
             break;
         case 7 :
             ui->status_label->setText("停止模式，稳定当前状态，进行作业（暂不开发）");
@@ -432,12 +463,15 @@ void MainWindow::update_status(uint8_t run_mode)
             alltitude_hold_on = 0;
             ui->AltHoldModeON->setEnabled(false);
             ui->AltHoldModeOFF->setEnabled(false);
+            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->depth_target->setEnabled(false);
             ui->set_depth_target->setEnabled(false);
+
             ui->AttHoldModeON->setEnabled(false);
             ui->AttHoldModeOFF->setEnabled(false);
-            ui->set_attitude_target->setEnabled(false);
-            ui->altitude->setStyleSheet("background-color: rgb(146, 200, 224)");
             ui->yaw->setStyleSheet("background-color: rgb(146, 200, 224)");
+            ui->attitude_target->setEnabled(false);
+            ui->set_attitude_target->setEnabled(false);
             break;
         }
     }
@@ -445,6 +479,7 @@ void MainWindow::update_status(uint8_t run_mode)
 
     }
     rovstate_pre = run_mode;
+    count++;
 
 }
 
