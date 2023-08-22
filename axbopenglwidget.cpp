@@ -38,8 +38,8 @@ void AXBOpenGLWidget::drawShape(float _pitch,float _roll, float _yaw)
 //   qDebug()<<msg.ROL;
 //   qDebug()<<msg.PIT;
 
-    m_angle_x=(int)_roll;
-    m_angle_y=(int)_pitch;
+    m_angle_x=(int)_pitch;
+    m_angle_y=(int)_roll;
     m_angle_z= - (int)_yaw;
     update();
 }
