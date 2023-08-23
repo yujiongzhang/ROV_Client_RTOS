@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_gamepad,&QGamepad::connectedChanged,this,[=](bool isconnect){
         if(isconnect)
         {
-            QMessageBox::information(this,"手柄连接","已经成功连接了手柄，恭喜！");
+            QMessageBox::information(this,"手柄连接","已经成功连接了手柄，恭喜！\n这里是ROV_Client_ultra");
         }
         else{QMessageBox::information(this,"手柄连接","手柄未连接");}
     });
