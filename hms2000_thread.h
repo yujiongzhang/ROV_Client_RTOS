@@ -91,12 +91,14 @@ private:
     uchar hms_buf1[HMSPPIDATASIZE];
     uchar hms_buf2[HMSPPIDATASIZE];
     uchar hms_midBuf[HMSPPIDATASIZE];
-    int m_nAngle; //1~588 一次+1  n表示int, 声纳上传的angle，不为实际角度
+
     int m_nLastAngle;  //初始化为-1，记录上次glb_nAngle
     int m_nMaxAngle;//初始化为588 hms2000声纳硬件决定
     double m_angle;
     double m_scan_step;
 
+public:
+    int m_nAngle; //1~588 一次+1  n表示int, 声纳上传的angle，不为实际角度
 
 
 signals:

@@ -2269,9 +2269,9 @@ QPushButton::disabled{
                  </widget>
                 </item>
                 <item row="3" column="5">
-                 <widget class="QPushButton" name="sonar_recodeON_PushButton_2">
+                 <widget class="QPushButton" name="sonar_scan_environment_PushButton">
                   <property name="enabled">
-                   <bool>false</bool>
+                   <bool>true</bool>
                   </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -2283,7 +2283,7 @@ QPushButton::disabled{
                    <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string>备用</string>
+                   <string>环境扫描</string>
                   </property>
                  </widget>
                 </item>

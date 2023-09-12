@@ -61,7 +61,18 @@ void Hms2000::stop_recode()
 
 void Hms2000::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
+//旧
+//    QPainter painter(this);
+//    painter.drawImage(this->rect(), image);
+
+//新
+    int pingNum = my_hms2000_thread->m_nAngle;
+    double pingAngle = pingNum / 588 * 360;
+    QPainter painter(&image);
+    painter.setPen(Qt::red);
+    int centerX = image.width()/2;
+    int centerY = image.height()/2;
+    painter.drawLine(QPoint(centerX,centerY),QPoint(centerX + sin(pingAngle), centerY - cos(pingAngle)));//画上当前扫描的线
     painter.drawImage(this->rect(), image);
 }
 

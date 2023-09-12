@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_gamepad,&QGamepad::connectedChanged,this,[=](bool isconnect){
         if(isconnect)
         {
-            QMessageBox::information(this,"手柄连接","已经成功连接了手柄，恭喜！\n这里是ROV_Client_ultra");
+            QMessageBox::information(this,"手柄连接","已经成功连接了手柄，恭喜！\n这里是ROV_Client_ultra 0825");
         }
         else{QMessageBox::information(this,"手柄连接","手柄未连接");}
     });
@@ -767,6 +767,13 @@ void MainWindow::on_sonar_set_PushButton_clicked()
     connect(my_sonarsets,&SonarSet::s_sonar_set,ui->sonar,&Hms2000::set_sonar_config);
 }
 
+
+
+void MainWindow::on_sonar_scan_environment_PushButton_clicked()
+{
+
+}
+
 // 声纳数据记录与停止
 void MainWindow::on_sonar_recode_PushButton_clicked()
 {
@@ -890,6 +897,7 @@ void MainWindow::on_camera2_is_main_button_clicked()
 
     camera_status = 1;
 }
+
 
 
 

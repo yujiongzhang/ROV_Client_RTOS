@@ -32,12 +32,6 @@ void AXBOpenGLWidget::set_viewat(QVector3D _camera_position, QVector3D _camera_f
 
 void AXBOpenGLWidget::drawShape(float _pitch,float _roll, float _yaw)
 {
-//   qDebug()<<"drawShape";
-//   qDebug()<<msg.THR;
-//   qDebug()<<msg.YAW;
-//   qDebug()<<msg.ROL;
-//   qDebug()<<msg.PIT;
-
     m_angle_x=(int)_pitch;
     m_angle_y=(int)_roll;
     m_angle_z= - (int)_yaw;

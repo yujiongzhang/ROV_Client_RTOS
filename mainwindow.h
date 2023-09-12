@@ -110,6 +110,8 @@ private slots:
 
     void on_sonar_set_PushButton_clicked();
 
+    void on_sonar_scan_environment_PushButton_clicked();
+
     void on_sonar_recode_PushButton_clicked();
 
 private:
