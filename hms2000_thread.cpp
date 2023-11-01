@@ -367,6 +367,10 @@ void hms2000_thread::run()
             memcpy(hms_bufnow,sonardatahms2000_out.sonardata_hms2000,sonardatahms2000_out.data_len);
             if(m_nLastAngle!=-1)
             {
+                if(m_nAngle == 584){
+                    emit frameOver();//当前360°扫描完成
+                }
+
                 int i;
                 for(i=0;i<300;i++)
                 {
@@ -387,6 +391,7 @@ void hms2000_thread::run()
             }
             m_angle = m_nAngle*360.0/m_nMaxAngle;
             Scan(m_angle,hms_bufnow,sonardatahms2000_out.data_len,m_scan_step);
+
 
             if(hms_bufnow == hms_buf1)
             {

@@ -103,6 +103,7 @@ public:
 
 signals:
     void receiveImage(QImage);
+    void frameOver();
 
 public slots:
     //播放视频对象

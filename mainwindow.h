@@ -139,6 +139,9 @@ private:
     int depth_hold_on;//0 表示 未开定深 || 1 表示 开启定深
     int alltitude_hold_on; //0 表示 未开定艏 || 1 表示 开启定艏
 
+    volatile int start_environment_scan;
+    volatile float frame_angle;
+
     void uiInit();//初始化ui上的一些值
     void paramInit();//初始化Mainwindow中的参数值
 
@@ -149,5 +152,7 @@ private:
     void process_ROV_status(Robot_status_DATA f_robot_status_data);//处理接收到的机器人状态信息
     void process_ROV_txtmsg(char* msg);//处理接收到的机器人文本信息
     void update_status(uint8_t run_mode);//处理接收到的机器人状态信息--用于更新状态
+
+    void set_servo_angle(float _angle);
 };
 #endif // MAINWINDOW_H

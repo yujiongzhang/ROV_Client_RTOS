@@ -31,6 +31,8 @@ public:
     void start_recode();
     void stop_recode();
 
+    hms2000_thread *my_hms2000_thread;
+
 protected:
     void paintEvent(QPaintEvent *);
 
@@ -44,8 +46,6 @@ private:
 
     //内存中的图
     QImage image;
-
-    hms2000_thread *my_hms2000_thread;
 
     int m_iValue;
 };

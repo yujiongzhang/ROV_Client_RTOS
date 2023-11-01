@@ -98,6 +98,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(worker2,&sendfile::s_ROV_status,this,&MainWindow::process_ROV_status);// 端口2 接收处理1类消息
     connect(worker2,&sendfile::s_ROV_txtmsg,this,&MainWindow::process_ROV_txtmsg);// 端口2 接收处理2类消息
 
+
+
+
     // 设置一个重复调用 MainWindow::realtimeDataSlot 的计时器
     connect(&virtual_dataTimer, SIGNAL(timeout()), this, SLOT(virtualtimeDataSlot()));
     virtual_dataTimer.start(0); // Interval 0 means to refresh as fast as possib-》le
@@ -173,7 +176,6 @@ void MainWindow::uiInit()
     ui->brightness_label->setText("0");
 
 
-
     //---模型形态---------
     ui->openGLWidget->set_viewat(QVector3D(0.0f, -1.3f, 0.3f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,0.0f,1.0f));
     ui->openGLWidget_yaw->set_viewat(QVector3D(0.0f, 0.0f, 1.5f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,1.0f,0.0f));
@@ -207,6 +209,9 @@ void MainWindow::paramInit()
     rovstate_pre = 0;
     depth_hold_on = 0;
     alltitude_hold_on = 0;
+
+    start_environment_scan = 0;
+    frame_angle = 0;
 }
 
 void MainWindow::on_connectServer_clicked()
@@ -233,7 +238,6 @@ void MainWindow::on_actionstartPlot_triggered()
 
     // 当 my_plot 窗口关闭后，相关的connect也会消失，此处无需disconnect
     connect(this->worker2,&sendfile::s_ROV_status,my_plot,&startPlot::updateSlot);// 画图窗口处理 接收到的1类消息
-
 }
 
 void MainWindow::on_actionhelp_triggered()
@@ -481,6 +485,11 @@ void MainWindow::update_status(uint8_t run_mode)
     rovstate_pre = run_mode;
     count++;
 
+}
+
+void MainWindow::set_servo_angle(float _angle)
+{
+    emit s_servo_angle((int8_t)(_angle));
 }
 
 //处理ROV上传的文本信息
@@ -771,7 +780,33 @@ void MainWindow::on_sonar_set_PushButton_clicked()
 
 void MainWindow::on_sonar_scan_environment_PushButton_clicked()
 {
+    QMetaObject::Connection sonarFrameConnect;
 
+    sonarFrameConnect = connect(ui->sonar->my_hms2000_thread,&hms2000_thread::frameOver,this,[=](){
+        if(start_environment_scan){
+            qDebug()<<"frameOver" << frame_angle;
+
+            set_servo_angle(frame_angle);
+            frame_angle = frame_angle + 1;
+
+            if(frame_angle == 10){
+                start_environment_scan = 0;
+                //结束声纳扫描
+                ui->sonar->stop_sonar();
+                disconnect(sonarFrameConnect);
+            }
+        }
+    });//处理声纳的单帧信息
+
+    //进入闭环模式
+    qDebug()<<"开始环境扫描";
+    start_environment_scan = 1;
+    frame_angle = -5;
+    set_servo_angle(frame_angle);
+    frame_angle = frame_angle+1;
+
+    //开始声纳扫描
+    ui->sonar->start_sonar();
 }
 
 // 声纳数据记录与停止
