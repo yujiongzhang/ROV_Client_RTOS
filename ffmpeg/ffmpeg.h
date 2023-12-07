@@ -24,6 +24,7 @@ protected:
 private:
     volatile bool stopped;          //线程停止标志位
     volatile bool isPlay;           //播放视频标志位
+    volatile bool isRecord;           //播放视频标志位
 
     int frameFinish;                //一帧完成
     int videoWidth;                 //视频宽度
@@ -45,7 +46,13 @@ private:
     AVCodecContext *audioCodec;     //音频解码器
     SwsContext *swsContext;         //处理图片数据对象
 
+    AVCodec* codec; // 解码器
+    AVFormatContext* output_format_ctx;//输出格式对象
+    const char* output_url;
+    AVStream* video_stream; //输出视频流
+
     AVDictionary *options;          //参数对象
+
     AVCodec *videoDecoder;          //视频解码
     AVCodec *audioDecoder;          //音频解码
 
@@ -69,6 +76,10 @@ public slots:
     void next();
     //停止采集线程
     void stop();
+    //开始录制
+    void record();
+    //停止录制
+    void stopRecord();
 };
 
 

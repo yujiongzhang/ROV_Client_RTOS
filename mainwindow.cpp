@@ -714,18 +714,18 @@ void MainWindow::on_camera_detection_OFF_clicked()
 
 void MainWindow::on_videoRecodeON_clicked()
 {
-//    ui->camera->videoRecodeOn();
+    ui->camera->videoRecodeOn();
 
-//    ui->videoRecodeON->setEnabled(false);
-//    ui->videoRecodeOFF->setEnabled(true);
+    ui->videoRecodeON->setEnabled(false);
+    ui->videoRecodeOFF->setEnabled(true);
 }
 
 void MainWindow::on_videoRecodeOFF_clicked()
 {
-//     ui->camera->videoRecodeOFF();
+     ui->camera->videoRecodeOFF();
 
-//     ui->videoRecodeOFF->setEnabled(false);
-//     ui->videoRecodeON->setEnabled(true);
+     ui->videoRecodeOFF->setEnabled(false);
+     ui->videoRecodeON->setEnabled(true);
 }
 
 

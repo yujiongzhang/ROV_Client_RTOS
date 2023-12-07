@@ -39,7 +39,7 @@ SOURCES += \
     sonarset.cpp \
     startplot.cpp \
     threadsafe_queue.cpp \
-    zhifan.cpp \
+    zhifan.cpp
 
 
 HEADERS += \
