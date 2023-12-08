@@ -8,6 +8,7 @@ FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
     stopped = false;
     isPlay = false;
     isRecord = false;
+    isRecord_start = false;
 
     frameFinish = false;
     videoWidth = 0;
@@ -31,7 +32,7 @@ FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
 
     codec = NULL; // 解码器
     output_format_ctx = NULL;
-    output_url = "222.mp4";
+    output_url = "1208.mp4";
     video_stream = NULL;
 
     options = NULL;
@@ -145,45 +146,45 @@ bool FFmpegThread::init()
     //----------视频流部分结束----------
 
     //----------音频流部分开始----------
-    if (1) {
-        //循环查找音频流索引
-        audioStreamIndex = -1;
-        for (uint i = 0; i < avFormatContext->nb_streams; i++) {
-            if (avFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
-                audioStreamIndex = i;
-                break;
-            }
-        }
+//    if (1) {
+//        //循环查找音频流索引
+//        audioStreamIndex = -1;
+//        for (uint i = 0; i < avFormatContext->nb_streams; i++) {
+//            if (avFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
+//                audioStreamIndex = i;
+//                break;
+//            }
+//        }
 
-        //有些没有音频流,所以这里不用返回
-        if (audioStreamIndex == -1) {
-            qDebug() << TIMEMS << "find audio stream index error";
-        } else {
-            //获取音频流
-            AVStream *audioStream = avFormatContext->streams[audioStreamIndex];
-            audioCodec = audioStream->codec;
+//        //有些没有音频流,所以这里不用返回
+//        if (audioStreamIndex == -1) {
+//            qDebug() << TIMEMS << "find audio stream index error";
+//        } else {
+//            //获取音频流
+//            AVStream *audioStream = avFormatContext->streams[audioStreamIndex];
+//            audioCodec = audioStream->codec;
 
-            //获取音频流解码器,或者指定解码器
-            audioDecoder = avcodec_find_decoder(audioCodec->codec_id);
-            //audioDecoder = avcodec_find_decoder_by_name("aac");
-            if (audioDecoder == NULL) {
-                qDebug() << TIMEMS << "audio codec not found";
-                return false;
-            }
+//            //获取音频流解码器,或者指定解码器
+//            audioDecoder = avcodec_find_decoder(audioCodec->codec_id);
+//            //audioDecoder = avcodec_find_decoder_by_name("aac");
+//            if (audioDecoder == NULL) {
+//                qDebug() << TIMEMS << "audio codec not found";
+//                return false;
+//            }
 
-            //打开音频解码器
-            result = avcodec_open2(audioCodec, audioDecoder, NULL);
-            if (result < 0) {
-                qDebug() << TIMEMS << "open audio codec error";
-                return false;
-            }
+//            //打开音频解码器
+//            result = avcodec_open2(audioCodec, audioDecoder, NULL);
+//            if (result < 0) {
+//                qDebug() << TIMEMS << "open audio codec error";
+//                return false;
+//            }
 
-            QString audioInfo = QString("音频流信息 -> 索引: %1  解码: %2  比特率: %3  声道数: %4  采样: %5")
-                                .arg(audioStreamIndex).arg(audioDecoder->name).arg(avFormatContext->bit_rate)
-                                .arg(audioCodec->channels).arg(audioCodec->sample_rate);
-            qDebug() << TIMEMS << audioInfo;
-        }
-    }
+//            QString audioInfo = QString("音频流信息 -> 索引: %1  解码: %2  比特率: %3  声道数: %4  采样: %5")
+//                                .arg(audioStreamIndex).arg(audioDecoder->name).arg(avFormatContext->bit_rate)
+//                                .arg(audioCodec->channels).arg(audioCodec->sample_rate);
+//            qDebug() << TIMEMS << audioInfo;
+//        }
+//    }
     //----------音频流部分结束----------
 
     //预分配好内存
@@ -222,44 +223,9 @@ bool FFmpegThread::init()
 // -----------------------------------------------------------------------------
 // 保存视频相关设置-----------------------------------------------------------------
 
-    //函数用于创建输出文件的 AVFormatContext 结构体。
-    avformat_alloc_output_context2(&output_format_ctx, nullptr, nullptr, output_url);
-    if (!output_format_ctx) {
-        printf("Could not create output format context");
-        return -7;
-    }
 
-    // 函数用于为输出文件创建新的流。
-    video_stream = avformat_new_stream(output_format_ctx, videoDecoder);
-    if (!video_stream) {
-        printf("Failed to create video stream");
-        return -8;
-    }
 
-    // 将输入文件中的视频流参数复制到输出文件的视频流参数中。
-    if (avcodec_parameters_copy(video_stream->codecpar, avFormatContext->streams[videoStreamIndex]->codecpar) < 0) {
-        printf("Failed to copy codec parameters");
-        return -9;
-    }
 
-    // 将输出文件视频流的编解码器标签（FourCC）设为 0。
-    video_stream->codecpar->codec_tag = 0;
-
-    // 将输出文件视频流的编解码器标签（FourCC）设为 0。
-    video_stream->codecpar->codec_tag = 0;
-
-    if (!(output_format_ctx->oformat->flags & AVFMT_NOFILE)) {
-        if (avio_open(&output_format_ctx->pb, output_url, AVIO_FLAG_WRITE) < 0) {
-            printf("Could not open output file '%s'", output_url);
-            return -10;
-        }
-    }
-
-    // 写入输出文件的格式头。
-    if (avformat_write_header(output_format_ctx, nullptr) < 0) {
-        printf("Error occurred when opening output file");
-        return -11;
-    }
 
 // 保存视频相关设置-----------------------------------------------------------------
 // -----------------------------------------------------------------------------
@@ -283,9 +249,6 @@ void FFmpegThread::run()
             int index = avPacket->stream_index;
             if (index == videoStreamIndex) {
 
-#if 0
-                avcodec_decode_video2(videoCodec, avFrame2, &frameFinish, avPacket);
-#else
                 // 将视频帧数据包发送给视频解码器进行解码。
                 frameFinish = avcodec_send_packet(videoCodec, avPacket);
                 if (frameFinish < 0) {
@@ -298,7 +261,6 @@ void FFmpegThread::run()
                 if (frameFinish < 0) {
                     continue;
                 }
-#endif
 
                 if (frameFinish >= 0) {//判断帧数据是否解码成功。
                     //将数据转成一张图片
@@ -310,6 +272,47 @@ void FFmpegThread::run()
                     }
 
                     if(isRecord){
+                        if(isRecord_start){
+                            //函数用于创建输出文件的 AVFormatContext 结构体。
+                            avformat_alloc_output_context2(&output_format_ctx, nullptr, nullptr, output_url);
+                            if (!output_format_ctx) {
+                                printf("Could not create output format context");
+                            }
+
+                            // 函数用于为输出文件创建新的流。
+                            video_stream = avformat_new_stream(output_format_ctx, videoDecoder);
+                            if (!video_stream) {
+                                printf("Failed to create video stream");
+                            }
+
+                            // 将输入文件中的视频流参数复制到输出文件的视频流参数中。
+                            if (avcodec_parameters_copy(video_stream->codecpar, avFormatContext->streams[videoStreamIndex]->codecpar) < 0) {
+                                printf("Failed to copy codec parameters");
+                            }
+
+                            // 将输出文件视频流的编解码器标签（FourCC）设为 0。
+                            video_stream->codecpar->codec_tag = 0;
+
+                            if (!(output_format_ctx->oformat->flags & AVFMT_NOFILE)) {
+                                if (avio_open(&output_format_ctx->pb, output_url, AVIO_FLAG_WRITE) < 0) {
+                                    printf("Could not open output file '%s'", output_url);
+                                }
+                            }
+                            // 写入输出文件的格式头。
+                            if (avformat_write_header(output_format_ctx, nullptr) < 0) {
+                                printf("Error occurred when opening output file");
+                            }
+                            qDebug()<<"开始录像";
+                            start_record_pts = avPacket->pts;
+                            start_record_dts = avPacket->dts;
+                            isRecord_start = false;
+                        }
+                        qDebug()<<"avPacket->pts" << avPacket->pts;
+                        qDebug()<<"avPacket->dts" << avPacket->dts;
+                        avPacket->pts = avPacket->pts - start_record_pts + 3600;
+                        avPacket->dts = avPacket->dts - start_record_pts + 3600;
+                        qDebug()<<"after avPacket->pts" << avPacket->pts;
+                        qDebug()<<"after avPacket->dts" << avPacket->dts;
                         avPacket->stream_index = video_stream->index;// 将当前数据包的流索引改为输出文件视频流的索引。
                         av_interleaved_write_frame(output_format_ctx, avPacket);//将改变流索引后的数据包写入输出文件。
                     }
@@ -423,6 +426,7 @@ void FFmpegThread::stop()
 void FFmpegThread::record()
 {
     isRecord = true;
+    isRecord_start = true;
 }
 
 void FFmpegThread::stopRecord()

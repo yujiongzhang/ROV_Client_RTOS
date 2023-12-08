@@ -24,7 +24,8 @@ protected:
 private:
     volatile bool stopped;          //线程停止标志位
     volatile bool isPlay;           //播放视频标志位
-    volatile bool isRecord;           //播放视频标志位
+    volatile bool isRecord;           //录制视频标志位
+    volatile bool isRecord_start;           //录制视频开始标志位
 
     int frameFinish;                //一帧完成
     int videoWidth;                 //视频宽度
@@ -33,6 +34,9 @@ private:
     int oldHeight;                  //上一次视频高度
     int videoStreamIndex;           //视频流索引
     int audioStreamIndex;           //音频流索引
+
+    int64_t start_record_pts;       //录像开始显示时间戳
+    int64_t start_record_dts;       //录像开始解码时间戳
 
 
 
