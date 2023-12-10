@@ -82,7 +82,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 INCLUDEPATH += $$PWD/ffmpeg
 include ($$PWD/ffmpeg/ffmpeg.pri)
-LIBS += -L$$PWD/ffmpeg/bin -lavcodec-58 -lavdevice-58 -lavfilter-7 -lavformat-58 -lavutil-56 -lpostproc-55 -lswresample-3 -lswscale-5
+#LIBS += -L$$PWD/ffmpeg/bin -lavcodec-58 -lavdevice-58 -lavfilter-7 -lavformat-58 -lavutil-56 -lpostproc-55 -lswresample-3 -lswscale-5
 
 #INCLUDEPATH += $$PWD/HMS2000
 #include ($$PWD/HMS2000/HMS2000.pri)
