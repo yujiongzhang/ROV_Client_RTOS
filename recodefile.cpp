@@ -6,7 +6,7 @@ recodeFile::recodeFile(QObject *parent) : QObject(parent)
     qDebug() << "创建数据记录线程 ";
     filename = QString("./recode/recode_%1_%2.txt").arg(QDate::currentDate().toString("yyyy_MM_dd"),QTime::currentTime().toString("hh_mm_ss"));
     ofs.open(filename.toStdString());
-    ofs<<"time stamp"<<" | "<<"depth"<<" | "<<"yaw"<<std::endl;
+    ofs<<"time stamp"<<" | "<<"depth"<<" | "<<"yaw" << " | "<<"roll"<<" | "<<"pitch"<<std::endl;
     ofs.close();
 }
 
@@ -31,6 +31,10 @@ void recodeFile::writeRecode(Robot_status_DATA _status)
         ofs<<_status.ROV_depth;
         ofs<<' ';
         ofs<<_status.ROV_IMU_data.yaw;
+        ofs<<' ';
+        ofs<<_status.ROV_IMU_data.roll;
+        ofs<<' ';
+        ofs<<_status.ROV_IMU_data.pitch;
         ofs<<std::endl;
         ofs.close();
     } else {

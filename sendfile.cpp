@@ -495,7 +495,7 @@ void sendfile::rev_TcpData()
     if(m_tcp->bytesAvailable() >= 5){
         QByteArray header = m_tcp->read(1);
         memcpy(&ROV2PCComu,header.data(),1);
-        while(ROV2PCComu.header != 0xA5)
+        while(ROV2PCComu.header != 0xA5) // 找头
         {
 //            qDebug()<<"header error";
 

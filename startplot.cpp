@@ -40,7 +40,7 @@ void startPlot::setupRealtimeDataDemo1(QCustomPlot *customPlot)
     timeTicker->setTimeFormat("%h:%m:%s");
     customPlot->xAxis->setTicker(timeTicker);
     customPlot->axisRect()->setupFullAxesBox();
-    customPlot->yAxis->setRange(0, 360);
+    customPlot->yAxis->setRange(-180, 360);
 
     // 使左轴和下轴将其范围转移到右轴和上轴
     connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2, SLOT(setRange(QCPRange)));
