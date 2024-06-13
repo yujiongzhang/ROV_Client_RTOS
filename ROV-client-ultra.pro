@@ -25,7 +25,6 @@ SOURCES += \
     help.cpp \
     hms2000.cpp \
     hms2000_thread.cpp \
-    ispingable.cpp \
     joystickrule.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -50,7 +49,6 @@ HEADERS += \
     help.h \
     hms2000.h \
     hms2000_thread.h \
-    ispingable.h \
     joystickrule.h \
     mainwindow.h \
     msg.h \
@@ -80,9 +78,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$PWD/ffmpeg
-include ($$PWD/ffmpeg/ffmpeg.pri)
 
+INCLUDEPATH += $$PWD/RtspCamera
+include ($$PWD/RtspCamera/RtspCamera.pri)
 
 DISTFILES +=
 

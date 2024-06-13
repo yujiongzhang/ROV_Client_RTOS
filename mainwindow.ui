@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1600</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,20 +18,26 @@
     <normaloff>:/images/images/tubiao.ico</normaloff>:/images/images/tubiao.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{
-	background-color: rgb(146,200,224);
-}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_7">
+   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,3">
+    <property name="spacing">
+     <number>6</number>
+    </property>
     <property name="leftMargin">
-     <number>9</number>
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>9</number>
+     <number>0</number>
     </property>
-    <item row="0" column="0">
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
      <widget class="QWidget" name="widget_15" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -41,13 +47,13 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>200</width>
+        <width>100</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>400</width>
+        <width>16777215</width>
         <height>16777215</height>
        </size>
       </property>
@@ -60,7 +66,7 @@
       <property name="styleSheet">
        <string notr="true">font: 10pt;</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,2,3,4,3,10,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,2,3,4,3,0,10,1">
        <property name="topMargin">
         <number>9</number>
        </property>
@@ -70,8 +76,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_8">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 210, 0);
-font: 10pt;</string>
+          <string notr="true"/>
          </property>
          <property name="title">
           <string>指令下发端口</string>
@@ -139,7 +144,7 @@ QPushButton::disabled{
        <item>
         <widget class="QGroupBox" name="groupBox_9">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 210, 0);</string>
+          <string notr="true"/>
          </property>
          <property name="title">
           <string>数据接收端口</string>
@@ -221,11 +226,11 @@ QPushButton::disabled{
          <property name="title">
           <string>深度 &amp; 高度</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0,0,0" columnstretch="0,0,0,0,0">
+         <layout class="QGridLayout" name="gridLayout_5" rowstretch="1,1,1,1" columnstretch="0,0,0,0,0">
           <item row="0" column="4">
            <widget class="QPushButton" name="AltHoldModeOFF">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -266,6 +271,12 @@ QPushButton::disabled{
           </item>
           <item row="2" column="2">
            <widget class="QLineEdit" name="depth_target">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="styleSheet">
              <string notr="true">color: rgb(255, 0, 0);
 font.bold : true</string>
@@ -280,7 +291,14 @@ font.bold : true</string>
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QLineEdit" name="altitude"/>
+           <widget class="QLineEdit" name="altitude">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_3">
@@ -292,7 +310,7 @@ font.bold : true</string>
           <item row="0" column="3">
            <widget class="QPushButton" name="AltHoldModeON">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -339,12 +357,19 @@ QPushButton::disabled{
            </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QLineEdit" name="height"/>
+           <widget class="QLineEdit" name="height">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
           <item row="2" column="4">
            <widget class="QPushButton" name="set_depth_target">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -771,7 +796,14 @@ QPushButton::disabled{
            </widget>
           </item>
           <item row="0" column="4">
-           <widget class="QLineEdit" name="cabin_humi"/>
+           <widget class="QLineEdit" name="cabin_humi">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_12">
@@ -795,13 +827,81 @@ QPushButton::disabled{
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="cpu_temp"/>
+           <widget class="QLineEdit" name="cpu_temp">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="cabin_temp"/>
+           <widget class="QLineEdit" name="cabin_temp">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
           <item row="1" column="4">
-           <widget class="QLineEdit" name="cabin_humi_2"/>
+           <widget class="QLineEdit" name="cabin_humi_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>运动档位选择</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QRadioButton" name="common_radioButton">
+            <property name="styleSheet">
+             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
+
+QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
+QRadioButton::checked{color:rgb(255, 170, 0);}
+QRadioButton::unchecked{color:rgb(255, 255, 255);}
+</string>
+            </property>
+            <property name="text">
+             <string>普通档</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="action_radioButton">
+            <property name="styleSheet">
+             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
+
+QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
+QRadioButton::checked{color:rgb(255, 170, 0);}
+QRadioButton::unchecked{color:rgb(255, 255, 255);}</string>
+            </property>
+            <property name="text">
+             <string>运动档</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -828,6 +928,9 @@ QPushButton::disabled{
               <bold>false</bold>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
            </widget>
           </item>
          </layout>
@@ -845,10 +948,8 @@ QPushButton::disabled{
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 210, 0);
-font-size: 10pt;
-font-weight: bold;
-font-family: Arial;</string>
+          <string notr="true">font-weight: bold;
+</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
@@ -907,1634 +1008,774 @@ font-family: Arial;</string>
       </layout>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QWidget" name="widget_18" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>200</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 10pt;</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="2,1,2,4">
+    <item>
+     <widget class="QWidget" name="widget_3" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,4">
        <item>
-        <widget class="QGroupBox" name="groupBox_5">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Adobe 黑体 Std R</family>
-           <pointsize>10</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 210, 0);</string>
-         </property>
-         <property name="title">
-          <string>电机运行情况</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_6" rowstretch="0">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QWidget" name="widget_9" native="true">
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_11">
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR 左 </string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed5">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_34">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(85, 170, 255);</string>
-               </property>
-               <property name="text">
-                <string>CRA 左 </string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_18">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR左上</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_26">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR左下</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="qMotorLineEdit" name="craSpeed1">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed1">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QWidget" name="widget_29" native="true">
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_9">
-             <item row="0" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="qMotorLineEdit" name="craSpeed2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_33">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR 右 </string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_35">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(85, 170, 255);</string>
-               </property>
-               <property name="text">
-                <string>CRA 右 </string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR右上</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_27">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>THR右下</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="qMotorLineEdit" name="thrSpeed6">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>运动档位选择</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1">
           <item>
-           <widget class="QRadioButton" name="common_radioButton">
-            <property name="styleSheet">
-             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
-
-QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
-QRadioButton::checked{color:rgb(255, 170, 0);}
-QRadioButton::unchecked{color:rgb(255, 255, 255);}
-</string>
+           <widget class="QGroupBox" name="groupBox_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="text">
-             <string>普通档</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="action_radioButton">
-            <property name="styleSheet">
-             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
-
-QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
-QRadioButton::checked{color:rgb(255, 170, 0);}
-QRadioButton::unchecked{color:rgb(255, 255, 255);}</string>
-            </property>
-            <property name="text">
-             <string>运动档</string>
-            </property>
-            <property name="iconSize">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>20</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_7">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>控制：灯、舵机</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="3,2">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>9</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QWidget" name="widget_10" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_10">
-             <item row="0" column="1">
-              <widget class="QLabel" name="steering_gear_angle_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>30</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>30</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: rgb(255, 170, 0);</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="text">
-                <string>舵机</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QSlider" name="steering_gear_angle">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QSlider::groove:horizontal{ 
-         height: 12px; 
-         left: 0px; 
-         right: 0px; 
-         border:0px;    
-         border-radius:6px;    
-         background:rgba(0,0,0,60);
-  } 
-
-QSlider::handle:horizontal{ 
-        width:  20px; 
-         height: 50px;
-		background:rgba(255,140,0,255);
-
- } 
-
- QSlider::sub-page:horizontal{
-       background:rgba(255,170,0,1);
-border-radius:6px;    
-}</string>
-               </property>
-               <property name="minimum">
-                <number>-90</number>
-               </property>
-               <property name="maximum">
-                <number>90</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_20">
-               <property name="maximumSize">
-                <size>
-                 <width>50</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>亮度  </string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="brightness_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>30</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: rgb(255, 170, 0);</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QSlider" name="brightness">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QSlider::groove:horizontal{ 
-         height: 12px; 
-         left: 0px; 
-         right: 0px; 
-         border:0px;    
-         border-radius:6px;
-background:rgba(0,0,0,60);
-
-  } 
-
-QSlider::handle:horizontal{ 
-        width:  20px; 
-         height: 50px;
-		margin-top:0px;
-		margin-bottom:0px;
-	background-color: rgb(255, 150, 0);
-
-
- } 
-
- QSlider::sub-page:horizontal{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 0, 255), stop:1 rgba(255, 170, 0, 255));
-
-border-radius:6px;    
-}</string>
-               </property>
-               <property name="value">
-                <number>50</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="widget_26" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_17">
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QPushButton" name="lightON">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}</string>
-               </property>
-               <property name="text">
-                <string>开灯</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="lightOFF">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}</string>
-               </property>
-               <property name="text">
-                <string>关灯</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="servo_angle_up">
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}</string>
-               </property>
-               <property name="text">
-                <string>舵机前移1度</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="servo_angle_down">
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}</string>
-               </property>
-               <property name="text">
-                <string>舵机后移1度</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_12">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>控制：摄像头、声纳</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QWidget" name="widget_19" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="1" column="3" colspan="3">
-              <widget class="QFrame" name="frame_2">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_12" columnstretch="1,1,1,1" columnminimumwidth="1,1,1,1">
-                <item row="0" column="0">
-                 <widget class="QPushButton" name="camera_detection_ON">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>检测开</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QPushButton" name="HDvideo_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>高清视频</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QPushButton" name="camera_detection_recode">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>拍照</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QPushButton" name="camera2_is_main_button">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #DD2222;
-    border-color: #FF0000;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>主显示</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QPushButton" name="camera_detection_OFF">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>检测关</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QPushButton" name="camera_detection_recode_2">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>开始录像</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QPushButton" name="HDvideo_3">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>停止录像</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item row="0" column="3" colspan="3">
-              <widget class="QFrame" name="frame">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,0,0,0">
-                <item row="2" column="0">
-                 <widget class="QPushButton" name="cameraON">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>打开相机</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QPushButton" name="cameraOFF">
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>关闭相机</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="2">
-                 <widget class="QPushButton" name="videoRecodeON">
-                  <property name="enabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>开始录像</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QPushButton" name="camera_is_main_button">
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #EE1111;
-    border-color: #FF0000;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>主显示</string>
-                  </property>
-                  <property name="checkable">
-                   <bool>false</bool>
-                  </property>
-                  <property name="checked">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="3">
-                 <widget class="QPushButton" name="videoRecodeOFF">
-                  <property name="enabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>停止录像</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QPushButton" name="pictureRecode">
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>拍照</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="QPushButton" name="HDvideo">
-                  <property name="text">
-                   <string>高清视频</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item row="2" column="3" colspan="3">
-              <widget class="QFrame" name="frame_3">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_13">
-                <item row="2" column="4">
-                 <widget class="QPushButton" name="sonar_recode_PushButton">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>记录数据</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QPushButton" name="sonar_is_main_button">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #DD2222;
-    border-color: #FF0000;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>主显示</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QPushButton" name="sonar_ON">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>打开声纳</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QPushButton" name="sonar_OFF">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QPushButton{
-	font: 10pt &quot;微软雅黑&quot;;
-    color: #2f3640;
-    background-color: #f5f690;
-    border-color: #2f3640;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    padding: 1px;
-}
-
-QPushButton::hover{	
-    color: #FFFFFF;
-    background-color: #718093;
-    border-color: #2f3640;
-}
-
-QPushButton::pressed,QPushButton::checked{
-    color: #FFFFFF;
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
-}
-
-QPushButton::disabled{
-    color: #FFFFFF;
-    background-color: #dcdde1;
-    border-color: #dcdde1;
-}
-</string>
-                  </property>
-                  <property name="text">
-                   <string>关闭声纳</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="4">
-                 <widget class="QPushButton" name="sonar_set_PushButton">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>设置参数</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="5">
-                 <widget class="QPushButton" name="sonar_Recode">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>拍照</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="5">
-                 <widget class="QPushButton" name="sonar_scan_environment_PushButton">
-                  <property name="enabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>环境扫描</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QWidget" name="widget_25" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3" rowstretch="1,3" columnstretch="1,1,1">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBox_14">
-         <property name="styleSheet">
-          <string notr="true">	font: 10pt</string>
-         </property>
-         <property name="title">
-          <string>ROV姿态</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_14" rowstretch="1,6" columnstretch="1,1">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-          <property name="horizontalSpacing">
-           <number>2</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>0</number>
-          </property>
-          <item row="1" column="1">
-           <widget class="AspectRatioWidget" name="aspect_ratio_weight_00" native="true">
-            <widget class="AXBOpenGLWidget" name="openGLWidget_yaw">
-             <property name="geometry">
-              <rect>
-               <x>30</x>
-               <y>20</y>
-               <width>121</width>
-               <height>181</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-            </widget>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="AspectRatioWidget" name="aspect_ratio_weight_0" native="true">
-            <widget class="AXBOpenGLWidget" name="openGLWidget">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>20</y>
-               <width>151</width>
-               <height>181</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-            </widget>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_28">
             <property name="font">
              <font>
+              <family>Adobe 黑体 Std R</family>
               <pointsize>10</pointsize>
               <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
-            <property name="text">
-             <string>        横滚 &amp; 俯仰</string>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_29">
-            <property name="text">
-             <string>           航向</string>
+            <property name="title">
+             <string>电机运行情况</string>
             </property>
+            <layout class="QGridLayout" name="gridLayout_6" rowstretch="0">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QWidget" name="widget_9" native="true">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_11">
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_32">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR 左 </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed5">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="label_34">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(85, 170, 255);</string>
+                  </property>
+                  <property name="text">
+                   <string>CRA 左 </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_18">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR左上</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_26">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR左下</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed3">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="qMotorLineEdit" name="craSpeed1">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed1">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QWidget" name="widget_29" native="true">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="0" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="qMotorLineEdit" name="craSpeed2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_33">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR 右 </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="label_35">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(85, 170, 255);</string>
+                  </property>
+                  <property name="text">
+                   <string>CRA 右 </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_19">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR右上</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_27">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>THR右下</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed4">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="qMotorLineEdit" name="thrSpeed6">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QGroupBox" name="groupBox_13">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">	font: 10pt</string>
-         </property>
-         <property name="title">
-          <string>机位2</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
           <item>
-           <widget class="AspectRatioWidget" name="aspect_ratio_weight_2" native="true">
-            <widget class="FFmpegWidget" name="camera_2" native="true">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>10</y>
-               <width>341</width>
-               <height>211</height>
-              </rect>
+           <widget class="QGroupBox" name="groupBox_14">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="title">
+             <string>ROV姿态</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3" rowstretch="1,10" columnstretch="0,0">
+             <property name="leftMargin">
+              <number>0</number>
              </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+             <property name="topMargin">
+              <number>0</number>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
+             <property name="rightMargin">
+              <number>0</number>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(0, 0, 0);</string>
+             <property name="horizontalSpacing">
+              <number>0</number>
              </property>
-            </widget>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_28">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>横滚 &amp; 俯仰</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_29">
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
+               <property name="text">
+                <string>航向</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="AspectRatioWidget" name="aspect_ratio_weight_0" native="true">
+               <widget class="AXBOpenGLWidget" name="openGLWidget">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>20</y>
+                  <width>151</width>
+                  <height>181</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="AspectRatioWidget" name="aspect_ratio_weight_00" native="true">
+               <widget class="AXBOpenGLWidget" name="openGLWidget_yaw">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>20</y>
+                  <width>161</width>
+                  <height>141</height>
+                 </rect>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </widget>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QGroupBox" name="groupBox_11">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="title">
-          <string>机位3</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_26">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
           <item>
-           <widget class="AspectRatioWidget" name="aspect_ratio_weight_3" native="true">
-            <widget class="Hms2000" name="sonar" native="true">
-             <property name="geometry">
-              <rect>
-               <x>30</x>
-               <y>10</y>
-               <width>311</width>
-               <height>201</height>
-              </rect>
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>控制：灯、舵机</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4" stretch="3,2">
+             <property name="spacing">
+              <number>0</number>
              </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(0, 113, 170);</string>
+             <property name="leftMargin">
+              <number>0</number>
              </property>
-            </widget>
+             <property name="topMargin">
+              <number>9</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>9</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_10" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_10">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="steering_gear_angle_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>30</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>30</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 170, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>舵机</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QSlider" name="steering_gear_angle">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="minimum">
+                   <number>-90</number>
+                  </property>
+                  <property name="maximum">
+                   <number>90</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_20">
+                  <property name="maximumSize">
+                   <size>
+                    <width>50</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>亮度  </string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="brightness_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>30</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 170, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSlider" name="brightness">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="value">
+                   <number>50</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_26" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="lightON">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>开灯</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="lightOFF">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>关灯</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="servo_angle_up">
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>舵机前移1度</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="servo_angle_down">
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton{
+	font: 10pt &quot;微软雅黑&quot;;
+    color: #2f3640;
+    background-color: #f5f690;
+    border-color: #2f3640;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1px;
+}
+
+QPushButton::hover{	
+    color: #FFFFFF;
+    background-color: #718093;
+    border-color: #2f3640;
+}
+
+QPushButton::pressed,QPushButton::checked{
+    color: #FFFFFF;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #273c75, stop:1 #487eb0);
+}
+
+QPushButton::disabled{
+    color: #FFFFFF;
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>舵机后移1度</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="1" column="0" colspan="3">
+       <item>
         <widget class="QGroupBox" name="groupBox_10">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -2615,7 +1856,7 @@ QPushButton::disabled{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1920</width>
+     <width>1600</width>
      <height>21</height>
     </rect>
    </property>
@@ -2697,12 +1938,6 @@ QPushButton::disabled{
    <class>AspectRatioWidget</class>
    <extends>QWidget</extends>
    <header location="global">aspectratiowidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Hms2000</class>
-   <extends>QWidget</extends>
-   <header location="global">hms2000.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

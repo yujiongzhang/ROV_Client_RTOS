@@ -14,10 +14,7 @@
    <string>StartPlot</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{
-	background-color: rgb(146,200,224);
-}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="1">
@@ -55,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

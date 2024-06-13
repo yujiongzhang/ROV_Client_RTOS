@@ -20,8 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     qDebug() << "主线程地址: " << QThread::currentThread();
 
+    this->setTheme();
     uiInit();//界面初始化（按钮、图片等）
     paramInit();//参数初始化
+
 
 
     //创建线程对象
@@ -117,19 +119,6 @@ MainWindow::~MainWindow()
 //初始化ui的一些值
 void MainWindow::uiInit()
 {
-
-//    针对simu-rov-server
-//    ui->ip->setText("127.0.0.1");
-//    ui->port->setText("5501");
-//    ui->ip_2->setText("127.0.0.1");
-//    ui->port_2->setText("5502");
-
-//    针对ROV下位机
-//    ui->ip->setText("192.168.1.25");
-//    ui->port->setText("5001");
-//    ui->ip_2->setText("192.168.1.25");
-//    ui->port_2->setText("5002");
-
     QFile file(":/config/config/rovClientConfig.json");
     file.open(QFile::ReadOnly);
     QByteArray all = file.readAll();
@@ -148,15 +137,16 @@ void MainWindow::uiInit()
 
             camera1_urls.append(obj.value("camera1_urls").toString());
             camera2_urls.append(obj.value("camera2_urls").toString());
+            camera1_ip.append(obj.value("camera1_ip").toString());
+            camera2_ip.append(obj.value("camera2_ip").toString());
             qDebug() << "camera1 RTSP URL is:" << camera1_urls;
-            qDebug() << "camera2 RTSP URL is:" << camera2_urls;
+            qDebug() << "camera1 ip is:" << camera1_ip;
         }
 
     ui->lightOFF->setEnabled(false);
-    ui->cameraOFF->setEnabled(false);
-    ui->sonar_OFF->setEnabled(false);
-    ui->camera_detection_OFF->setEnabled(false);
-    ui->camera_is_main_button->setEnabled(false);
+    ui->camera->ChangeSizeDisplay(true);
+    ui->camera->setCameraIP(camera1_ip);
+    ui->camera->setUrl(camera1_urls);
 
     //定深功能相关
     ui->AltHoldModeON->setEnabled(true);
@@ -184,11 +174,7 @@ void MainWindow::uiInit()
     ui->aspect_ratio_weight_1->set_ration(16,9);
     ui->aspect_ratio_weight_1->set_layout(ui->camera);
 
-    ui->aspect_ratio_weight_2->set_ration(16,9);
-    ui->aspect_ratio_weight_2->set_layout(ui->camera_2);
 
-    ui->aspect_ratio_weight_3->set_ration(8,7);
-    ui->aspect_ratio_weight_3->set_layout(ui->sonar);
 
     ui->aspect_ratio_weight_0->set_ration(4,4);
     ui->aspect_ratio_weight_0->set_layout(ui->openGLWidget);
@@ -196,9 +182,7 @@ void MainWindow::uiInit()
     ui->aspect_ratio_weight_00->set_ration(4,4);
     ui->aspect_ratio_weight_00->set_layout(ui->openGLWidget_yaw);
 
-    ui->camera->set_default_picture(QImage(":/images/images/camera1.png"));
-    ui->camera_2->set_default_picture(QImage(":/images/images/camera2.png"));
-    ui->sonar->set_default_picture(QImage(":/images/images/sonar.png"));
+
 }
 
 void MainWindow::paramInit()
@@ -212,6 +196,16 @@ void MainWindow::paramInit()
 
     start_environment_scan = 0;
     frame_angle = 0;
+}
+
+void MainWindow::setTheme()
+{
+    QApplication *app = static_cast<QApplication *>(QCoreApplication::instance());
+    QFile cssFile(":/config/theme/dark.css");
+    cssFile.open(QFile::ReadOnly);
+    QString css = QString(cssFile.readAll());
+    cssFile.close();
+    app->setStyleSheet(css);
 }
 
 void MainWindow::on_connectServer_clicked()
@@ -583,11 +577,6 @@ void MainWindow::on_common_radioButton_clicked()
     speed_adjust = SPEED_ADJUST_COMMON;
 }
 
-void MainWindow::on_HDvideo_clicked()
-{
-    zhifan * my_zhifan = new(zhifan);
-    my_zhifan->show();
-}
 
 
 void MainWindow::open_worker1_connects()
@@ -659,86 +648,6 @@ void MainWindow::close_worker1_connects()
 //--------------------------------------------
 //-------------摄像头---------------------------
 
-void MainWindow::on_cameraON_clicked()
-{
-    // 使用水下摄像头则使用以下固定的 RTSP码流格式
-    // rtsp://192.168.1.168:8554/0
-    // rtmp://192.168.1.168:1935/live/ls_00_0
-
-    QString url1 = camera1_urls.trimmed();
-    std::string url1_ip = url1.toStdString().substr(7,13);
-
-    if(isPingable(url1_ip.c_str())){
-        ui->camera->setUrl(url1);
-        ui->camera->open();
-        ui->cameraON->setEnabled(false);
-        ui->cameraOFF->setEnabled(true);
-    }
-    else{
-        QMessageBox::information(this,"摄像探头未连接","未能找到摄像探头%s"+url1,"好吧TAT，我检查一下连线和rtsp地址");
-    }
-}
-
-void MainWindow::on_cameraOFF_clicked()
-{
-    ui->camera->close();
-    ui->cameraON->setEnabled(true);
-    ui->cameraOFF->setEnabled(false);   
-//    ui->camera->set_default_picture(QImage(":/images/images/camera1.png"));
-}
-
-void MainWindow::on_camera_detection_ON_clicked()
-{
-    QString url2 = camera2_urls.trimmed();
-    std::string url2_ip = url2.toStdString().substr(7,12);
-
-    if(isPingable(url2_ip.c_str())){
-        ui->camera_2->setUrl(url2);
-        ui->camera_2->open();
-        ui->camera_detection_ON->setEnabled(false);
-        ui->camera_detection_OFF->setEnabled(true);
-    }
-    else{
-        QMessageBox::information(this,"摄像探头未连接","未能找到摄像头:"+url2,"好吧TAT，我检查一下连线和rtsp地址");
-    }
-}
-
-void MainWindow::on_camera_detection_OFF_clicked()
-{
-    ui->camera_2->close();
-    ui->camera_detection_ON->setEnabled(true);
-    ui->camera_detection_OFF->setEnabled(false);
-//    ui->camera_2->set_default_picture(QImage(":/images/images/camera2.png"));
-}
-
-
-void MainWindow::on_videoRecodeON_clicked()
-{
-    ui->camera->videoRecodeOn();
-
-    ui->videoRecodeON->setEnabled(false);
-    ui->videoRecodeOFF->setEnabled(true);
-}
-
-void MainWindow::on_videoRecodeOFF_clicked()
-{
-     ui->camera->videoRecodeOFF();
-
-     ui->videoRecodeOFF->setEnabled(false);
-     ui->videoRecodeON->setEnabled(true);
-}
-
-
-void MainWindow::on_pictureRecode_clicked()
-{
-    ui->camera->takeOnePhoto();
-}
-
-void MainWindow::on_camera_detection_recode_clicked()
-{
-    ui->camera_2->takeOnePhoto();
-}
-
 //-------------摄像头---------------------------
 //---------------------------------------------
 
@@ -746,192 +655,18 @@ void MainWindow::on_camera_detection_recode_clicked()
 
 //--------------------------------------------
 //-------------声纳---------------------------
-void MainWindow::on_sonar_ON_clicked()
-{
-    ui->sonar->start_sonar();
-    ui->sonar_ON->setEnabled(false);
-    ui->sonar_OFF->setEnabled(true);
-}
-
-void MainWindow::on_sonar_OFF_clicked()
-{
-    ui->sonar->stop_sonar();
-    ui->sonar_ON->setEnabled(true);
-    ui->sonar_OFF->setEnabled(false);
-    ui->sonar->set_default_picture(QImage(":/images/images/sonar.png"));
-}
-
-void MainWindow::on_sonar_Recode_clicked()
-{
-    ui->sonar->take_one_photo();
-    ui->sonar->take_one_photo_origin();
-}
 
 
 //打开声纳配置界面
-void MainWindow::on_sonar_set_PushButton_clicked()
-{
-    my_sonarsets = new(SonarSet);
-    my_sonarsets->show();
-    connect(my_sonarsets,&SonarSet::s_sonar_set,ui->sonar,&Hms2000::set_sonar_config);
-}
 
 
-
-void MainWindow::on_sonar_scan_environment_PushButton_clicked()
-{
-    QMetaObject::Connection sonarFrameConnect;
-
-    sonarFrameConnect = connect(ui->sonar->my_hms2000_thread,&hms2000_thread::frameOver,this,[=](){
-        if(start_environment_scan){
-            qDebug()<<"frameOver" << frame_angle;
-
-            set_servo_angle(frame_angle);
-            frame_angle = frame_angle + 1;
-
-            if(frame_angle == 10){
-                start_environment_scan = 0;
-                //结束声纳扫描
-                ui->sonar->stop_sonar();
-                disconnect(sonarFrameConnect);
-            }
-        }
-    });//处理声纳的单帧信息
-
-    //进入闭环模式
-    qDebug()<<"开始环境扫描";
-    start_environment_scan = 1;
-    frame_angle = -5;
-    set_servo_angle(frame_angle);
-    frame_angle = frame_angle+1;
-
-    //开始声纳扫描
-    ui->sonar->start_sonar();
-}
 
 // 声纳数据记录与停止
-void MainWindow::on_sonar_recode_PushButton_clicked()
-{
-    if(ui->sonar_recode_PushButton->text() == "记录数据"){
-        ui->sonar->start_recode();
-        ui->sonar_recode_PushButton->setText("停止记录");
-    }
-    else{
-        ui->sonar->stop_recode();
-        ui->sonar_recode_PushButton->setText("记录数据");
-    }
-}
 
 
 //--------------------------------------------
 //-------------页面显示切换---------------------------
-void MainWindow::on_sonar_is_main_button_clicked()
-{
-    if(camera_status == 0){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera_2);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->sonar);
 
-        ui->aspect_ratio_weight_1->set_ration(8,7);
-        ui->aspect_ratio_weight_1->set_layout(ui->sonar);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera);
-        ui->aspect_ratio_weight_3->set_ration(16,9);
-        ui->aspect_ratio_weight_3->set_layout(ui->camera_2);
-    }
-    else if(camera_status == 1){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->camera_2);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->sonar);
-
-        ui->aspect_ratio_weight_1->set_ration(8,7);
-        ui->aspect_ratio_weight_1->set_layout(ui->sonar);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera);
-        ui->aspect_ratio_weight_3->set_ration(16,9);
-        ui->aspect_ratio_weight_3->set_layout(ui->camera_2);
-    }
-    else if(camera_status == 2){
-    }
-    ui->camera_is_main_button->setEnabled(true);
-    ui->camera2_is_main_button->setEnabled(true);
-    ui->sonar_is_main_button->setEnabled(false);
-    camera_status = 2;
-}
-
-void MainWindow::on_camera_is_main_button_clicked()
-{
-    if(camera_status == 0){
-    }
-    else if(camera_status == 1){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->camera_2);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->sonar);
-
-        ui->aspect_ratio_weight_1->set_ration(16,9);
-        ui->aspect_ratio_weight_1->set_layout(ui->camera);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera_2);
-        ui->aspect_ratio_weight_3->set_ration(8,7);
-        ui->aspect_ratio_weight_3->set_layout(ui->sonar);
-
-    }
-    else if(camera_status == 2){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->sonar);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->camera_2);
-
-        ui->aspect_ratio_weight_1->set_ration(16,9);
-        ui->aspect_ratio_weight_1->set_layout(ui->camera);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera_2);
-        ui->aspect_ratio_weight_3->set_ration(8,7);
-        ui->aspect_ratio_weight_3->set_layout(ui->sonar);
-
-    }
-
-    ui->camera2_is_main_button->setEnabled(true);
-    ui->sonar_is_main_button->setEnabled(true);
-    ui->camera_is_main_button->setEnabled(false);
-    camera_status = 0;
-}
-
-void MainWindow::on_camera2_is_main_button_clicked()
-{
-    if(camera_status == 0){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera_2);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->sonar);
-
-        ui->aspect_ratio_weight_1->set_ration(16,9);
-        ui->aspect_ratio_weight_1->set_layout(ui->camera_2);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera);
-        ui->aspect_ratio_weight_3->set_ration(8,7);
-        ui->aspect_ratio_weight_3->set_layout(ui->sonar);
-    }
-    else if(camera_status == 1){
-
-    }
-    else if(camera_status == 2){
-        ui->aspect_ratio_weight_1->set_layout_remove(ui->sonar);
-        ui->aspect_ratio_weight_2->set_layout_remove(ui->camera);
-        ui->aspect_ratio_weight_3->set_layout_remove(ui->camera_2);
-
-        ui->aspect_ratio_weight_1->set_ration(16,9);
-        ui->aspect_ratio_weight_1->set_layout(ui->camera_2);
-        ui->aspect_ratio_weight_2->set_ration(16,9);
-        ui->aspect_ratio_weight_2->set_layout(ui->camera);
-        ui->aspect_ratio_weight_3->set_ration(8,7);
-        ui->aspect_ratio_weight_3->set_layout(ui->sonar);
-    }
-
-    ui->camera_is_main_button->setEnabled(true);
-    ui->sonar_is_main_button->setEnabled(true);
-    ui->camera2_is_main_button->setEnabled(false);
-
-    camera_status = 1;
-}
 
 
 

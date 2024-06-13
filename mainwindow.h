@@ -60,19 +60,8 @@ private slots:
 
     void on_steering_gear_angle_sliderReleased();
 
-    void on_cameraON_clicked();
-
-    void on_cameraOFF_clicked();
 
     void on_actionrecodefile_triggered();
-
-    void on_videoRecodeON_clicked();
-
-    void on_videoRecodeOFF_clicked();
-
-    void on_pictureRecode_clicked();
-
-    void on_HDvideo_clicked();
 
     void on_actionJoyStick_rule_triggered();
 
@@ -81,38 +70,18 @@ private slots:
 
     void on_common_radioButton_clicked();
 
-    void on_camera_detection_ON_clicked();
 
-    void on_camera_detection_OFF_clicked();
-
-    void on_camera_detection_recode_clicked();
 
     void on_servo_angle_up_clicked();
 
     void on_servo_angle_down_clicked();
 
-    void on_sonar_ON_clicked();
-
-    void on_sonar_OFF_clicked();
-
-    void on_sonar_is_main_button_clicked();
-
-    void on_camera_is_main_button_clicked();
-
-    void on_camera2_is_main_button_clicked();
 
     void on_set_depth_target_clicked();
 
     void on_set_attitude_target_clicked();
 
 
-    void on_sonar_Recode_clicked();
-
-    void on_sonar_set_PushButton_clicked();
-
-    void on_sonar_scan_environment_PushButton_clicked();
-
-    void on_sonar_recode_PushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -124,6 +93,8 @@ private:
 
     QString camera1_urls;
     QString camera2_urls;
+    QString camera1_ip;
+    QString camera2_ip;
 
     sendfile * worker;//发送消息
     sendfile * worker2;//接收消息
@@ -144,6 +115,7 @@ private:
 
     void uiInit();//初始化ui上的一些值
     void paramInit();//初始化Mainwindow中的参数值
+    void setTheme();
 
     void open_worker1_connects();
     void close_worker1_connects();

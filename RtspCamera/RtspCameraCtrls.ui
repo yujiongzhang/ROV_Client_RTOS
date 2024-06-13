@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RtspCameraCtrls</class>
+ <widget class="QWidget" name="RtspCameraCtrls">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>85</width>
+    <height>214</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="take_one_photo_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="RtspCameraRes.qrc">
+     <normaloff>:/RtspCameraResource/RtspCamera_take_photo_48.png</normaloff>:/RtspCameraResource/RtspCamera_take_photo_48.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>35</width>
+     <height>35</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="video_record_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="RtspCameraRes.qrc">
+     <normaloff>:/RtspCameraResource/RtspCamera_record_48.png</normaloff>:/RtspCameraResource/RtspCamera_record_48.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>35</width>
+     <height>35</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="open_camera_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="RtspCameraRes.qrc">
+     <normaloff>:/RtspCameraResource/RtspCamera_open_camera_256.png</normaloff>:/RtspCameraResource/RtspCamera_open_camera_256.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>35</width>
+     <height>35</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="RtspCameraRes.qrc"/>
+ </resources>
+ <connections/>
+</ui>

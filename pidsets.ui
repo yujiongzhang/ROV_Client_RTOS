@@ -14,10 +14,7 @@
    <string>PIDset</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{
-	background-color: rgb(146,200,224);
-}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -1124,7 +1121,7 @@ QPushButton:hover { background-color: rgb(0, 0, 0); }</string>
      <x>0</x>
      <y>0</y>
      <width>870</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

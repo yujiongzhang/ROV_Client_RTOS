@@ -136,7 +136,7 @@ void AXBOpenGLWidget::resizeGL(int w, int h)
 void AXBOpenGLWidget::paintGL()
 {
 
-    this->glClearColor(0.5725f,0.7843f,0.8784f,1.0f);//设置清屏颜色
+    this->glClearColor(0.2588f,0.2588f,0.2588f,1.0f);//设置清屏颜色
     this->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//清空颜色缓冲区
 
 

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>RtspCameraResource/RtspCamera_record_48.png</file>
+        <file>RtspCameraResource/RtspCamera_take_photo_48.png</file>
+        <file>RtspCameraResource/RtspCamera_background.png</file>
+        <file>RtspCameraResource/RtspCamera_isrecording_48.png</file>
+        <file>RtspCameraResource/RtspCamera_open_camera_256.png</file>
+    </qresource>
+</RCC>

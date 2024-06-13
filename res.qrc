@@ -18,6 +18,7 @@
     <qresource prefix="/config">
         <file>config/ctable.bin</file>
         <file>config/rovClientConfig.json</file>
+        <file>theme/dark.css</file>
     </qresource>
     <qresource prefix="/">
         <file>net-camera.qml</file>
