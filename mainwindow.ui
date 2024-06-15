@@ -868,12 +868,7 @@ QPushButton::disabled{
           <item>
            <widget class="QRadioButton" name="common_radioButton">
             <property name="styleSheet">
-             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
-
-QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
-QRadioButton::checked{color:rgb(255, 170, 0);}
-QRadioButton::unchecked{color:rgb(255, 255, 255);}
-</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>普通档</string>
@@ -886,11 +881,7 @@ QRadioButton::unchecked{color:rgb(255, 255, 255);}
           <item>
            <widget class="QRadioButton" name="action_radioButton">
             <property name="styleSheet">
-             <string notr="true">QRadioButton::indicator{width: 20px;height: 20px;color: rgb(255, 170, 0);}
-
-QRadioButton{font-size:12px;color: rgb(0, 255, 0);}
-QRadioButton::checked{color:rgb(255, 170, 0);}
-QRadioButton::unchecked{color:rgb(255, 255, 255);}</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>运动档</string>
@@ -1437,7 +1428,7 @@ QRadioButton::unchecked{color:rgb(255, 255, 255);}</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <layout class="QGridLayout" name="gridLayout_10">
+               <layout class="QGridLayout" name="gridLayout_10" columnstretch="1,1,5">
                 <item row="0" column="1">
                  <widget class="QLabel" name="steering_gear_angle_label">
                   <property name="sizePolicy">
@@ -1484,7 +1475,7 @@ QRadioButton::unchecked{color:rgb(255, 255, 255);}</string>
                 <item row="0" column="2">
                  <widget class="QSlider" name="steering_gear_angle">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
