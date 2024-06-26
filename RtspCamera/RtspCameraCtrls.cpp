@@ -1,6 +1,8 @@
+// author: zyj
+// File: RtspCameraCtrls.cpp
+
 #include "RtspCameraCtrls.h"
 #include "ui_RtspCameraCtrls.h"
-
 #include "ffmpeg.h"
 
 RtspCameraCtrls::RtspCameraCtrls(QWidget *parent) :
@@ -36,7 +38,6 @@ void RtspCameraCtrls::videoRecord(bool checked)
     else{
         m_ffmpegWidget->videoRecodeOn();
     }
-
 }
 
 void RtspCameraCtrls::openCamera(bool checked)
@@ -45,8 +46,6 @@ void RtspCameraCtrls::openCamera(bool checked)
         m_ffmpegWidget->close();
         return;
     }
-
-
     if(isCameraPingable(m_ffmpegWidget->m_cameraIP)){
         m_ffmpegWidget->open();
     }

@@ -41,47 +41,24 @@ signals:
 
 private slots:
     void on_connectServer_clicked();
-
     void on_actionstartPlot_triggered();
-
     void on_actionhelp_triggered();
-
     void virtualtimeDataSlot();
-
     void on_actionPIDsets_triggered();
-
     void on_connectServer_2_clicked();
-
     void on_lightON_clicked();
-
     void on_lightOFF_clicked();
-
     void on_brightness_sliderReleased();
-
     void on_steering_gear_angle_sliderReleased();
-
-
     void on_actionrecodefile_triggered();
-
     void on_actionJoyStick_rule_triggered();
-
-    
     void on_action_radioButton_clicked();
-
     void on_common_radioButton_clicked();
-
-
-
     void on_servo_angle_up_clicked();
-
     void on_servo_angle_down_clicked();
-
-
     void on_set_depth_target_clicked();
-
     void on_set_attitude_target_clicked();
-
-
+    void on_actionTCPUDPDbg_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -98,7 +75,6 @@ private:
 
     sendfile * worker;//发送消息
     sendfile * worker2;//接收消息
-
     QGamepad * m_gamepad;//手柄对象
 
     int connect_state_1;//发送消息的端口是否连接 1为连接，0为不连接
@@ -119,7 +95,6 @@ private:
 
     void open_worker1_connects();
     void close_worker1_connects();
-
 
     void process_ROV_status(Robot_status_DATA f_robot_status_data);//处理接收到的机器人状态信息
     void process_ROV_txtmsg(char* msg);//处理接收到的机器人文本信息

@@ -12,7 +12,6 @@ typedef unsigned short     uint16_t;
 typedef unsigned int       uint32_t;
 typedef unsigned long long uint64_t;
 
-
 extern uint8_t get_CRC8_check_sum(unsigned char *pchMessage,unsigned int dwLength,unsigned char ucCRC8);
 
 extern uint32_t verify_CRC8_check_sum(unsigned char *pchMessage, unsigned int dwLength);

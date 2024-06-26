@@ -1,3 +1,6 @@
+// author: zyj
+// File: pidsets.cpp
+
 #include "pidsets.h"
 #include "ui_pidsets.h"
 #include<QtDebug>

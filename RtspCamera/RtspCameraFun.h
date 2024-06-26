@@ -5,7 +5,6 @@
 #include <QString>
 #include <QProcess>
 
-
 // 建议用这个
 bool isCameraPingable(const QString& IP);
 

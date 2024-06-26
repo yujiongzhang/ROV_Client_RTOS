@@ -8,14 +8,12 @@
 #include <QMetaType>
 
 
-static ROVComuPacket ROV2PCComu; //创建接收ROV数据上传的数据包
-static ROVComuPacket PC2ROVComu; //创建下发指令的数据包
+extern ROVComuPacket ROV2PCComu; //创建接收ROV数据上传的数据包
+extern ROVComuPacket PC2ROVComu; //创建下发指令的数据包
 static struct Robot_status_DATA robot_status_data; //表示机器人状态的DATA中的结构体
 static struct motion_control_cmd_DATA motion_control_cmd_data; //下发运动指令的DATA中的结构体,并初始化
 static struct target_control_cmd_DATA target_control_cmd_data; //下发控制目标指令的结构体
-
 static int speed_adjust;
-
 
 class sendfile : public QObject
 {
@@ -70,7 +68,6 @@ public:
     void process_TcpData_type1();//从处理类型1的消息
     void process_TcpData_type2();//从处理类型2的消息
 
-
 signals:
     void connectOK();
     void gameover();
@@ -86,8 +83,6 @@ signals:
 private:
     QTcpSocket * m_tcp;
     char rov_msg_str[200]; //记录rov上传的文本信息;
-
-
 };
 
 #endif // SENDFILE_H

@@ -21,10 +21,8 @@ public:
     FFmpegWidget* m_ffmpegWidget;
 
     void takeOnePhoto();
-
     void videoRecord(bool checked);
     void openCamera(bool checked);
-
 
 private:
     Ui::RtspCameraCtrls *ui;

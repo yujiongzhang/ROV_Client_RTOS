@@ -1,3 +1,6 @@
+// author: zyj
+// File: startplot.cpp
+
 #include "startplot.h"
 #include "ui_startplot.h"
 
@@ -26,7 +29,6 @@ startPlot::~startPlot()
     qDebug() << "startPlot 类被释放" ;
 }
 
-
 void startPlot::setupRealtimeDataDemo1(QCustomPlot *customPlot)
 {
     customPlot->addGraph(); // 添加图形1
@@ -47,7 +49,6 @@ void startPlot::setupRealtimeDataDemo1(QCustomPlot *customPlot)
     connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2, SLOT(setRange(QCPRange)));
 }
 
-
 void startPlot::setupRealtimeDataDemo2(QCustomPlot *customPlot)
 {
     customPlot->addGraph(); // 添加图形1
@@ -64,7 +65,6 @@ void startPlot::setupRealtimeDataDemo2(QCustomPlot *customPlot)
     connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2, SLOT(setRange(QCPRange)));
 }
 
-
 void startPlot::addDataSlot1(double _pitch, double _roll, double _yaw)
 {
     ui->customPlot->graph(0)->addData(this->t, _pitch);
@@ -75,8 +75,6 @@ void startPlot::addDataSlot1(double _pitch, double _roll, double _yaw)
 
     ui->customPlot->replot();
 }
-
-
 
 void startPlot::addDataSlot2(double mun)
 {
@@ -91,7 +89,6 @@ void startPlot::updateSlot(Robot_status_DATA f_robot_status_data)
     addDataSlot1(f_robot_status_data.ROV_IMU_data.pitch,f_robot_status_data.ROV_IMU_data.roll,f_robot_status_data.ROV_IMU_data.yaw);
     addDataSlot2(f_robot_status_data.ROV_depth);
 }
-
 
 //通过时间来创建一个虚拟的模拟下位机上传
 void startPlot::timeDataSlot()

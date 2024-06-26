@@ -1,12 +1,13 @@
+// author: zyj
+// File: mainwindow.cpp
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QThread>
-
 #include <QFileDialog>
 #include "help.h"
 #include "zhifan.h"
-
 #include "aspectratiowidget.h"
 
 
@@ -23,8 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setTheme();
     uiInit();//界面初始化（按钮、图片等）
     paramInit();//参数初始化
-
-
 
     //创建线程对象
     QThread * t1 = new QThread;
@@ -45,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this,&MainWindow::startConnect,worker,&sendfile::connectServer);
     connect(this,&MainWindow::sendFile,worker,&sendfile::sendFile);
     connect(this,&MainWindow::sendMsg,worker,&sendfile::sendMsg);
-
     connect(this,&MainWindow::startConnect2,worker2,&sendfile::connectServer);
 
     //处理主线程发送的信号
@@ -55,10 +53,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->connectServer->setEnabled(false);
     });
     connect(worker,&sendfile::gameover,this,[=](){
-//        t1->quit();
-//        t1->wait();
-//        worker->deleteLater();
-//        t1->deleteLater();
         close_worker1_connects();
         QMessageBox::information(this,"服务器断开","端口1已经断开");
         ui->connectServer->setEnabled(true);
@@ -70,10 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->status_label->setText("无力模式");
     });
     connect(worker2,&sendfile::gameover,this,[=](){
-//        t3->quit();
-//        t3->wait();
-//        worker2->deleteLater();
-//        t3->deleteLater();
         QMessageBox::information(this,"服务器断开","端口2已经断开");
         ui->status_label->setText("未连接：没有接收到ROV的消息");
         ui->connectServer_2->setEnabled(true);
@@ -96,20 +86,13 @@ MainWindow::MainWindow(QWidget *parent)
     // 端口2 接收消息并显示
     connect(worker2,&sendfile::recvMsg,ui->txt_msg,&QTextEdit::append);
 
-
     connect(worker2,&sendfile::s_ROV_status,this,&MainWindow::process_ROV_status);// 端口2 接收处理1类消息
     connect(worker2,&sendfile::s_ROV_txtmsg,this,&MainWindow::process_ROV_txtmsg);// 端口2 接收处理2类消息
 
-
-
-
     // 设置一个重复调用 MainWindow::realtimeDataSlot 的计时器
     connect(&virtual_dataTimer, SIGNAL(timeout()), this, SLOT(virtualtimeDataSlot()));
-    virtual_dataTimer.start(0); // Interval 0 means to refresh as fast as possib-》le
-//    connect(this,&MainWindow::rev_key2,my_plot,&startPlot::addDataSlot);
-
+    virtual_dataTimer.start(0);
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -165,7 +148,6 @@ void MainWindow::uiInit()
     ui->steering_gear_angle_label->setText(QString::number(ui->steering_gear_angle->value()));
     ui->brightness_label->setText("0");
 
-
     //---模型形态---------
     ui->openGLWidget->set_viewat(QVector3D(0.0f, -1.3f, 0.3f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,0.0f,1.0f));
     ui->openGLWidget_yaw->set_viewat(QVector3D(0.0f, 0.0f, 1.5f), QVector3D(0.0f,0.0f,0.0f), QVector3D(0.0f,1.0f,0.0f));
@@ -174,15 +156,11 @@ void MainWindow::uiInit()
     ui->aspect_ratio_weight_1->set_ration(16,9);
     ui->aspect_ratio_weight_1->set_layout(ui->camera);
 
-
-
     ui->aspect_ratio_weight_0->set_ration(4,4);
     ui->aspect_ratio_weight_0->set_layout(ui->openGLWidget);
 
     ui->aspect_ratio_weight_00->set_ration(4,4);
     ui->aspect_ratio_weight_00->set_layout(ui->openGLWidget_yaw);
-
-
 }
 
 void MainWindow::paramInit()
@@ -193,7 +171,6 @@ void MainWindow::paramInit()
     rovstate_pre = 0;
     depth_hold_on = 0;
     alltitude_hold_on = 0;
-
     start_environment_scan = 0;
     frame_angle = 0;
 }
@@ -229,7 +206,6 @@ void MainWindow::on_actionstartPlot_triggered()
 {
     my_plot = new(startPlot);//打开绘图窗口
     my_plot->show();
-
     // 当 my_plot 窗口关闭后，相关的connect也会消失，此处无需disconnect
     connect(this->worker2,&sendfile::s_ROV_status,my_plot,&startPlot::updateSlot);// 画图窗口处理 接收到的1类消息
 }
@@ -272,9 +248,14 @@ void MainWindow::on_actionrecodefile_triggered()
     }
 }
 
+void MainWindow::on_actionTCPUDPDbg_triggered()
+{
+    QProcess process;
+    process.startDetached("./TCPUDPDbg/TCPUDPDbg.exe");//分离式
+}
+
 //-------------  工具栏  -------------------------------------
 //-----------------------------------------------------------
-
 void MainWindow::virtualtimeDataSlot()//通过时间来创建一个虚拟的模拟下位机上传
 {
     static QTime timeStart2 = QTime::currentTime();
@@ -292,15 +273,6 @@ void MainWindow::virtualtimeDataSlot()//通过时间来创建一个虚拟的模�
 // 处理ROV上传的状态信息
 void MainWindow::process_ROV_status(Robot_status_DATA f_robot_status_data)
 {
-//    ui->thrSpeed1->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_1));
-//    ui->thrSpeed2->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_2));
-//    ui->thrSpeed3->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_3));
-//    ui->thrSpeed4->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_4));
-//    ui->thrSpeed5->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_5));
-//    ui->thrSpeed6->setText(QString::number(f_robot_status_data.ROV_motors_status.thruster_speed_6));
-//    ui->craSpeed1->setText(QString::number(f_robot_status_data.ROV_motors_status.crawler_motor_1));
-//    ui->craSpeed2->setText(QString::number(f_robot_status_data.ROV_motors_status.crawler_motor_2));
-
     ui->thrSpeed1->updatemotor(f_robot_status_data.ROV_motors_status.thruster_speed_1);
     ui->thrSpeed2->updatemotor(f_robot_status_data.ROV_motors_status.thruster_speed_2);
     ui->thrSpeed3->updatemotor(f_robot_status_data.ROV_motors_status.thruster_speed_3);
@@ -478,7 +450,6 @@ void MainWindow::update_status(uint8_t run_mode)
     }
     rovstate_pre = run_mode;
     count++;
-
 }
 
 void MainWindow::set_servo_angle(float _angle)
@@ -577,8 +548,6 @@ void MainWindow::on_common_radioButton_clicked()
     speed_adjust = SPEED_ADJUST_COMMON;
 }
 
-
-
 void MainWindow::open_worker1_connects()
 {
     //手柄信息 -> 端口1 发送消息
@@ -643,32 +612,5 @@ void MainWindow::close_worker1_connects()
     disconnect(this,&MainWindow::s_target_depth,worker,&sendfile::sendMsgTargetDepth);//设置目标深度
     disconnect(this,&MainWindow::s_target_attitude,worker,&sendfile::sendMsgTargetAttitude);//设置目标高度
 }
-
-
-//--------------------------------------------
-//-------------摄像头---------------------------
-
-//-------------摄像头---------------------------
-//---------------------------------------------
-
-
-
-//--------------------------------------------
-//-------------声纳---------------------------
-
-
-//打开声纳配置界面
-
-
-
-// 声纳数据记录与停止
-
-
-//--------------------------------------------
-//-------------页面显示切换---------------------------
-
-
-
-
 
 

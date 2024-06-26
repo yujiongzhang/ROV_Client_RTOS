@@ -1857,6 +1857,8 @@ QPushButton::disabled{
     </property>
     <addaction name="actionstartPlot"/>
     <addaction name="actionrecodefile"/>
+    <addaction name="separator"/>
+    <addaction name="actionTCPUDPDbg"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -1905,6 +1907,11 @@ QPushButton::disabled{
   <action name="actionJoyStick_rule">
    <property name="text">
     <string>JoyStick rule</string>
+   </property>
+  </action>
+  <action name="actionTCPUDPDbg">
+   <property name="text">
+    <string>TCPUDPDbg</string>
    </property>
   </action>
  </widget>

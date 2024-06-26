@@ -1,11 +1,15 @@
-#include "sendfile.h"
+// author: zyj
+// File: sendfile.cpp
 
+#include "sendfile.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QHostAddress>
 #include <qthread.h>
-
 #include <WinSock2.h>
+
+ROVComuPacket ROV2PCComu; //创建接收ROV数据上传的数据包
+ROVComuPacket PC2ROVComu; //创建下发指令的数据包
 
 class RobotComuPacket msg_recv;
 
@@ -90,28 +94,22 @@ void sendfile::sendMsgB(bool pressed)
         {
             motion_control_cmd_data.ModeType = 3; //按下按钮B后开启定航模式
          }
-
-
         //包装 PC2ROVComu 的函数，传入消息类型，DATA的指针（首地址），DATA的长度
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
-
     }
-
 }
 
 void sendfile::sendMsgLeft(bool pressed)
 {
     if(pressed){
         qDebug() << "Button Left" << pressed;
-
         if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 1 ||
            motion_control_cmd_data.ModeType == 2 ||
            motion_control_cmd_data.ModeType == 3 || motion_control_cmd_data.ModeType == 5)
         {
             motion_control_cmd_data.ModeType = 4; //按下按钮Left后开启定航模式
          }
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -122,7 +120,6 @@ void sendfile::sendMsgX(bool pressed)
     if(pressed)
     {
         qDebug() << "Button X" << pressed;
-
     }
 }
 
@@ -130,14 +127,12 @@ void sendfile::sendMsgY(bool pressed)
 {
     if(pressed){
         qDebug() << "Button Y" << pressed;
-
         if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 1 ||
            motion_control_cmd_data.ModeType == 3 ||
            motion_control_cmd_data.ModeType == 4 || motion_control_cmd_data.ModeType == 5)
         {
             motion_control_cmd_data.ModeType = 2; //按下按钮Y后开启定深模式
          }
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -147,14 +142,12 @@ void sendfile::sendMsgUp(bool pressed)
 {
     if(pressed){
         qDebug() << "Button Up" << pressed;
-
         if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 2 ||
            motion_control_cmd_data.ModeType == 3 ||
            motion_control_cmd_data.ModeType == 4 || motion_control_cmd_data.ModeType == 5)
         {
             motion_control_cmd_data.ModeType = 1; //按下按钮UP后为 开环模式
          }
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -164,12 +157,10 @@ void sendfile::sendMsgL1(bool pressed)
 {
     if(pressed){
         qDebug() << "Button L1" << pressed;
-
         if(motion_control_cmd_data.ModeType == 0 )
         {
             motion_control_cmd_data.ModeType = 6; //按下按钮L1后为 陆地爬行模式
          }
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -179,7 +170,6 @@ void sendfile::sendMsgR1(bool pressed)
 {
     if(pressed){
         qDebug() << "Button T1" << pressed;
-
         if(motion_control_cmd_data.ModeType == 1 || motion_control_cmd_data.ModeType == 2 ||
            motion_control_cmd_data.ModeType == 3 ||
            motion_control_cmd_data.ModeType == 4 )
@@ -195,9 +185,7 @@ void sendfile::sendMsgL2(bool pressed)
 {
     if(pressed){
         qDebug() << "Button L2" << pressed;
-
         motion_control_cmd_data.ModeType = 0; //按下按钮L1后为 无力模式
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -207,9 +195,7 @@ void sendfile::sendMsgR2(bool pressed)
 {
     if(pressed){
         qDebug() << "Button L2" << pressed;
-
         motion_control_cmd_data.ModeType = 7; //按下按钮L1后为 停止
-
         set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
         send_TcpData(1);//发送消息类型为1
     }
@@ -219,9 +205,7 @@ void sendfile::sendMsgR2(bool pressed)
 void sendfile::sendMsgLeftX(double value)
 {
     qDebug() << "Left X" << value;
-
     motion_control_cmd_data.ROL = int(value*180);
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -229,7 +213,6 @@ void sendfile::sendMsgLeftX(double value)
 void sendfile::sendMsgLeftY(double value)
 {
     qDebug() << "Left Y" << value;
-
 //    if(speed_adjust == SPEED_ADJUST_COMMON){
 //        motion_control_cmd_data.VZ = int(value*60);
 //    }
@@ -237,7 +220,6 @@ void sendfile::sendMsgLeftY(double value)
 //    {
         motion_control_cmd_data.VZ = int(value*100);
 //    }
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -245,9 +227,7 @@ void sendfile::sendMsgLeftY(double value)
 void sendfile::sendMsgRightX(double value)
 {
     qDebug() << "Righ tX" << value;
-
     motion_control_cmd_data.YAW = int(value*180);
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -260,7 +240,6 @@ void sendfile::sendMsgRightY(double value)
 //    else if(speed_adjust == SPEED_ADJUST_ACTION){
         motion_control_cmd_data.VX = int(-value*100);
 //    }
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -268,9 +247,7 @@ void sendfile::sendMsgRightY(double value)
 
 void sendfile::sendMsgY()
 {
-
     qDebug() <<  "Button AltHOldModeON";
-
     if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 1 )
     {
         motion_control_cmd_data.ModeType = 2;
@@ -279,7 +256,6 @@ void sendfile::sendMsgY()
     {
         motion_control_cmd_data.ModeType = 4;
     }
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 
@@ -288,7 +264,6 @@ void sendfile::sendMsgY()
 void sendfile::sendMsgUp()
 {
     qDebug() << "Button AltHOldModeOFF" ;
-
     if(motion_control_cmd_data.ModeType == 2 )
     {
         motion_control_cmd_data.ModeType = 1;
@@ -297,8 +272,6 @@ void sendfile::sendMsgUp()
     {
         motion_control_cmd_data.ModeType = 3;
     }
-
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 
@@ -307,7 +280,6 @@ void sendfile::sendMsgUp()
 void sendfile::sendMsgAttHoldON()
 {
     qDebug() <<  "开启定艏";
-
     if(motion_control_cmd_data.ModeType == 0 || motion_control_cmd_data.ModeType == 1 )
     {
         motion_control_cmd_data.ModeType = 3;
@@ -316,7 +288,6 @@ void sendfile::sendMsgAttHoldON()
     {
         motion_control_cmd_data.ModeType = 4;
     }
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -324,7 +295,6 @@ void sendfile::sendMsgAttHoldON()
 void sendfile::sendMsgAttHoldOFF()
 {
     qDebug() << "关闭定艏" ;
-
     if(motion_control_cmd_data.ModeType == 3 )
     {
         motion_control_cmd_data.ModeType = 1;
@@ -333,7 +303,6 @@ void sendfile::sendMsgAttHoldOFF()
     {
         motion_control_cmd_data.ModeType = 2;
     }
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -341,17 +310,14 @@ void sendfile::sendMsgAttHoldOFF()
 void sendfile::sendMsgPID(PIDs_set_DATA value)
 {
     qDebug() << "Seting PID" ;
-
     set_PC2ROVComu(2,(char*)(&value),sizeof(PIDs_set_DATA));
     send_TcpData(2);//发送消息类型为2
-
 }
 
 void sendfile::sendMsgBrightnessSet(int value)
 {
     qDebug() << "Brightness Set" << value;
     motion_control_cmd_data.brightness = value;
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -360,7 +326,6 @@ void sendfile::sendMsgServoAngle(int8_t value)
 {
     qDebug() << "servo angle set : " << value;
     motion_control_cmd_data.steering_gear_angle = value;
-
     set_PC2ROVComu(1,(char*)(&motion_control_cmd_data),sizeof(motion_control_cmd_data));
     send_TcpData(1);//发送消息类型为1
 }
@@ -369,7 +334,6 @@ void sendfile::sendMsgTargetDepth(float value)
 {
     qDebug()<<" set target depth: "<<value;
     target_control_cmd_data.target_depth = value;
-
     set_PC2ROVComu(3,(char*)(&target_control_cmd_data),sizeof (target_control_cmd_data));
     send_TcpData(3);
 
@@ -390,14 +354,11 @@ void sendfile::sendMsgTargetAttitude(float value)
 //包装 PC2ROVComu 的函数，传入消息类型，DATA的指针（首地址），DATA的长度
 void sendfile::set_PC2ROVComu(uint8_t msg_type, char* dataPtr, int datalen)
 {
-
     PC2ROVComu.msg_type = msg_type;                     //消息类型
     PC2ROVComu.dlen = datalen; //DATA的长度设置
     PC2ROVComu.CRC8 = get_CRC8_check_sum((unsigned char *)(&PC2ROVComu),4,0xFF); //帧头部分校验码
-//    qDebug()<<"CRC8:"<<PC2ROVComu.CRC8;
     memcpy(PC2ROVComu.buff,dataPtr,datalen); //把motion_control_cmd_data中的内容给
     PC2ROVComu.CRC16 = get_CRC16_check_sum((unsigned char *)(&PC2ROVComu),datalen+5,0xFFFF);//DATA部分校验码
-//    qDebug()<<"CRC16:"<<PC2ROVComu.CRC16;
 }
 
 //往 socket 中写入 PC2ROVComu 结构体。参数：消息类型
@@ -409,11 +370,9 @@ void sendfile::send_TcpData(uint8_t msg_type)
     if(msg_type == 1)
     {
         sendTcpData.resize(sizeof(motion_control_cmd_DATA)+7);                   // sendTcpData 根据数据类型调整大小
-//        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
         memcpy(sendTcpData.data(),&PC2ROVComu,sizeof(motion_control_cmd_DATA)+5);//把PC2ROVComu中的所有内容发送给sendTcpData
         memcpy(sendTcpData.data()+sizeof(motion_control_cmd_DATA)+5,&PC2ROVComu.CRC16,2);//把PC2ROVComu中的所有内容发送给sendTcpData
         m_tcp->write(sendTcpData);                //发送
-//        qDebug()<<"sendTcpData size :"<<sendTcpData.length();
         sendTcpData.clear();
     }
     else if(msg_type == 2)
@@ -439,46 +398,6 @@ void sendfile::send_TcpData(uint8_t msg_type)
 // -----------------以下为处理下位机上发（ROV->PC）的数据的相关函数-----------
 // ---------------------------------------------------------------------
 
-//void sendfile::rev_TcpData()
-//{
-//    recvTcpData = m_tcp->readAll();
-//    qDebug()<<"接收到信息";
-//    memcpy(&ROV2PCComu,recvTcpData,5);
-//    if(ROV2PCComu.header == 0xA5){
-//        if(verify_CRC8_check_sum((unsigned char *)(&ROV2PCComu),5))
-//        {
-//            switch(ROV2PCComu.msg_type)
-//            {
-//                case 1 : process_TcpData_type1();break;
-//                case 2 : process_TcpData_type2();break;
-//            }
-//        }
-//    }
-//}
-
-//void sendfile::process_TcpData_type1()
-//{
-//    memcpy(&ROV2PCComu,recvTcpData,sizeof(Robot_status_DATA)+5+2);//把所有的数据都拷贝到ROV2PCComu中
-//    if(verify_CRC16_check_sum((unsigned char *)(&ROV2PCComu),sizeof(Robot_status_DATA)+5+2))
-//    {
-//        memcpy(&robot_status_data,recvTcpData.data()+5,sizeof(Robot_status_DATA));//把DATA部分的数据拷贝给robot_status_data
-//        emit s_ROV_status(robot_status_data);
-//        emit s_Yaw(robot_status_data.ROV_IMU_data.yaw);
-//        emit s_altitude(robot_status_data.ROV_depth);
-//    }
-//}
-
-//void sendfile::process_TcpData_type2()
-//{
-//    memcpy(&ROV2PCComu,recvTcpData,ROV2PCComu.dlen+5+2);//把所有的数据都拷贝到ROV2PCComu中
-//    if(verify_CRC16_check_sum((unsigned char *)(&ROV2PCComu),ROV2PCComu.dlen+5+2))
-//    {
-//        QByteArray txt_msg;
-//        memcpy(&txt_msg,recvTcpData.data()+5,ROV2PCComu.dlen);//以文本的信息输出
-//        emit s_ROV_txtmsg(txt_msg);
-//    }
-//}
-
 
 void sendfile::rev_TcpData()
 {
@@ -488,7 +407,6 @@ void sendfile::rev_TcpData()
 
     if(m_tcp->bytesAvailable() == 0)
     {
-//        qDebug()<<"no msg";
         return;
     }
 
@@ -497,8 +415,6 @@ void sendfile::rev_TcpData()
         memcpy(&ROV2PCComu,header.data(),1);
         while(ROV2PCComu.header != 0xA5) // 找头
         {
-//            qDebug()<<"header error";
-
             if(m_tcp->bytesAvailable()>0){
                 header = m_tcp->read(1);
                 memcpy(&ROV2PCComu,header.data(),1);
@@ -516,11 +432,9 @@ void sendfile::rev_TcpData()
 
         if(ROV2PCComu.CRC8 != CRC8_verify)
         {
-//            qDebug()<<"CRC8 error";
             return;
         }
         totalBytes = ROV2PCComu.dlen;
-//        qDebug()<< "包头的长度"<< totalBytes;
     }
     else{
         return;
@@ -545,10 +459,6 @@ void sendfile::rev_TcpData()
                 uint16_t CRC16_verify;
                 QByteArray CRC16_verify_data = m_tcp->read(2);
                 memcpy(&CRC16_verify,CRC16_verify_data.data(),2);
-
-//                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
-//                qDebug()<<"CRC16_verify:"<<CRC16_verify;
-
                 if(ROV2PCComu.CRC16 == CRC16_verify)
                 {
                     process_TcpData_type1();
@@ -561,7 +471,6 @@ void sendfile::rev_TcpData()
                 //如果还有数据，继续下一个数据包
                 if(m_tcp->bytesAvailable()>0)
                 {
-//                    qDebug()<<"开始递归调用。。。";
                     rev_TcpData();
                 }
                 break;
@@ -575,10 +484,6 @@ void sendfile::rev_TcpData()
                 uint16_t CRC16_verify;
                 QByteArray CRC16_verify_data = m_tcp->read(2);
                 memcpy(&CRC16_verify,CRC16_verify_data.data(),2);
-
-//                qDebug()<<"CRC16_receive:"<<ROV2PCComu.CRC16;
-//                qDebug()<<"CRC16_verify:"<<CRC16_verify;
-
                 if(ROV2PCComu.CRC16 == CRC16_verify)
                 {
                     process_TcpData_type2();
@@ -598,16 +503,9 @@ void sendfile::process_TcpData_type1()
 {
 
     emit s_ROV_status(robot_status_data);
-//    qDebug()<<"ROV_IMU_data.yaw:"<<robot_status_data.ROV_IMU_data.yaw;
-//    qDebug()<<"ROV_IMU_data.ROV_depth:"<<robot_status_data.ROV_depth;
-
 }
 
 void sendfile::process_TcpData_type2()
 {
     emit s_ROV_txtmsg(rov_msg_str);
-//    qDebug()<<"接收到文本信息";
 }
-
-
-

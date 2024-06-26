@@ -1,3 +1,6 @@
+// author: zyj
+// File: recodefile.cpp
+
 #include "recodefile.h"
 #include<QThread>
 
@@ -40,6 +43,5 @@ void recodeFile::writeRecode(Robot_status_DATA _status)
     } else {
         qDebug() << "make file error" << filename;
     }
-
 }
 

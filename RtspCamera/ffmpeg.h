@@ -31,7 +31,6 @@ protected:
 
 private:
 
-
     int frameFinish;                //一帧完成
     int videoWidth;                 //视频宽度
     int videoHeight;                //视频高度
@@ -42,8 +41,6 @@ private:
 
     int64_t start_record_pts;       //录像开始显示时间戳
     int64_t start_record_dts;       //录像开始解码时间戳
-
-
 
     uint8_t *buffer;                //存储解码后图片buffer
     AVPacket *avPacket;             //包对象
@@ -91,7 +88,6 @@ public slots:
     void stopRecord();
 };
 
-
 class FFmpegRecodeThread : public QThread
 {
     Q_OBJECT
@@ -103,25 +99,18 @@ protected:
     void run();
 
 public:
-
     volatile bool isRecode;           //播放视频标志位
     //接收图像并保存
     void videoRecode(const QImage &image);
-
     void receiveImage(const QImage &_image);
-
     void play();
     void stop();
-
-
 signals:
 
 private:
     QImage image;
 
 };
-
-
 
 //实时视频显示窗体类
 class FFmpegWidget : public QWidget
@@ -133,13 +122,11 @@ public:
 
     void set_default_picture(QImage _image);
 
-
     RtspCameraCtrls m_rtspCameraCtrls;
     RtspCameraStatus m_rtspCameraStatus;
 
     QString m_cameraIP; //用来测试相机是否能ping通，防止相机无法打开造成死机
     void setCameraIP(const QString &ip);
-
 
     bool thisIsMain;
     bool thisIsMainChanged;
@@ -156,18 +143,13 @@ private:
     FFmpegThread *thread;
     FFmpegRecodeThread *recodeThread;
     QImage image;
-
     volatile bool isPhotos;           //播放视频标志位
-
 
 private slots:
     //接收图像并绘制
     void updateImage(const QImage &image);
-
     //接收单张图片
     void photos(const QImage &image);
-
-
 
 public slots:
     //设置视频流地址
@@ -183,17 +165,12 @@ public slots:
     void close();
     //清空
     void clear();
-
     //开始录像
     void videoRecodeOn();
     //停止录像
     void videoRecodeOFF();
-
     //拍照
     void takeOnePhoto();
-
-
-
 };
 
 #endif // FFMPEG_H

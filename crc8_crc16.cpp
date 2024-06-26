@@ -1,3 +1,6 @@
+// author: zyj
+// File: crc8_crc16.cpp
+
 #include "crc8_crc16.h"
 //crc8 generator polynomial:G(x)=x8+x5+x4+1
 const uint8_t CRC8_INIT = 0xff;
@@ -57,7 +60,6 @@ const uint16_t wCRC_table[256] =
 0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78
 };
 
-
 uint8_t get_CRC8_check_sum(unsigned char *pch_message,unsigned int dw_length,unsigned char ucCRC8)
 {
     unsigned char uc_index;
@@ -68,7 +70,6 @@ uint8_t get_CRC8_check_sum(unsigned char *pch_message,unsigned int dw_length,uns
     }
     return(ucCRC8);
 }
-
 
 uint32_t verify_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_length)
 {
@@ -81,7 +82,6 @@ uint32_t verify_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_lengt
     return ( ucExpected == pch_message[dw_length - 1] );
 }
 
-
 void append_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_length)
 {
     unsigned char ucCRC = 0;
@@ -92,7 +92,6 @@ void append_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_length)
     ucCRC = get_CRC8_check_sum((unsigned char *)pch_message, dw_length - 1, CRC8_INIT);
     pch_message[dw_length - 1] = ucCRC;
 }
-
 
 uint16_t get_CRC16_check_sum(uint8_t *pch_message,uint32_t dw_length,uint16_t wCRC)
 {
@@ -109,7 +108,6 @@ uint16_t get_CRC16_check_sum(uint8_t *pch_message,uint32_t dw_length,uint16_t wC
     return wCRC;
 }
 
-
 uint32_t verify_CRC16_check_sum(uint8_t *pchMessage, uint32_t dwLength)
 {
     uint16_t wExpected = 0;
@@ -120,8 +118,6 @@ uint32_t verify_CRC16_check_sum(uint8_t *pchMessage, uint32_t dwLength)
     wExpected = get_CRC16_check_sum(pchMessage, dwLength - 2, CRC16_INIT);
     return ((wExpected & 0xff) == pchMessage[dwLength - 2] && ((wExpected >> 8) & 0xff) == pchMessage[dwLength - 1]);
 }
-
-
 
 void append_CRC16_check_sum(uint8_t * pchMessage,uint32_t dwLength)
 {

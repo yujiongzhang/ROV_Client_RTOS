@@ -1,6 +1,8 @@
-﻿#include "ffmpeg.h"
-#include<QTime>
+﻿// author: zyj
+// File: ffmpeg.cpp
 
+#include "ffmpeg.h"
+#include<QTime>
 
 FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
 {
@@ -18,7 +20,7 @@ FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
     videoStreamIndex = -1;
     audioStreamIndex = -1;
 
-    url = "rtsp://admin:Deye123456@192.168.31.65:554/ch1/main/av_stream";
+    url = "";
 
     buffer = NULL;
     avPacket = NULL;
@@ -145,48 +147,6 @@ bool FFmpegThread::init()
     }
     //----------视频流部分结束----------
 
-    //----------音频流部分开始----------
-//    if (1) {
-//        //循环查找音频流索引
-//        audioStreamIndex = -1;
-//        for (uint i = 0; i < avFormatContext->nb_streams; i++) {
-//            if (avFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
-//                audioStreamIndex = i;
-//                break;
-//            }
-//        }
-
-//        //有些没有音频流,所以这里不用返回
-//        if (audioStreamIndex == -1) {
-//            qDebug() << TIMEMS << "find audio stream index error";
-//        } else {
-//            //获取音频流
-//            AVStream *audioStream = avFormatContext->streams[audioStreamIndex];
-//            audioCodec = audioStream->codec;
-
-//            //获取音频流解码器,或者指定解码器
-//            audioDecoder = avcodec_find_decoder(audioCodec->codec_id);
-//            //audioDecoder = avcodec_find_decoder_by_name("aac");
-//            if (audioDecoder == NULL) {
-//                qDebug() << TIMEMS << "audio codec not found";
-//                return false;
-//            }
-
-//            //打开音频解码器
-//            result = avcodec_open2(audioCodec, audioDecoder, NULL);
-//            if (result < 0) {
-//                qDebug() << TIMEMS << "open audio codec error";
-//                return false;
-//            }
-
-//            QString audioInfo = QString("音频流信息 -> 索引: %1  解码: %2  比特率: %3  声道数: %4  采样: %5")
-//                                .arg(audioStreamIndex).arg(audioDecoder->name).arg(avFormatContext->bit_rate)
-//                                .arg(audioCodec->channels).arg(audioCodec->sample_rate);
-//            qDebug() << TIMEMS << audioInfo;
-//        }
-//    }
-    //----------音频流部分结束----------
-
     //预分配好内存
     avPacket = av_packet_alloc();
     avFrame = av_frame_alloc();
@@ -217,20 +177,6 @@ bool FFmpegThread::init()
     //图像转换
     swsContext = sws_getContext(videoWidth, videoHeight, srcFormat, videoWidth, videoHeight, dstFormat, flags, NULL, NULL, NULL);
 
-    //输出视频信息
-    //av_dump_format(avFormatContext, 0, url.toStdString().data(), 0);
-
-// -----------------------------------------------------------------------------
-// 保存视频相关设置-----------------------------------------------------------------
-
-
-
-
-
-// 保存视频相关设置-----------------------------------------------------------------
-// -----------------------------------------------------------------------------
-
-    //qDebug() << TIMEMS << "init ffmpeg finsh";
     return true;
 }
 
@@ -620,9 +566,6 @@ void FFmpegWidget::takeOnePhoto()
     isPhotos = true;
     connect(thread, &FFmpegThread::receiveImage, this, &FFmpegWidget::photos);
 }
-
-
-
 
 FFmpegRecodeThread::FFmpegRecodeThread(QObject *parent) : QThread(parent)
 {

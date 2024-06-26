@@ -1,8 +1,9 @@
+// author: zyj
+// File: RtspCameraFun.cpp
 #include "RtspCameraFun.h"
 
 RtspCameraFun::RtspCameraFun()
 {
-
 }
 
 bool isCameraPingable(const QString &IP)
@@ -43,5 +44,4 @@ bool isCameraPingable(const QString &IP)
 #else
     // Code for other platforms
 #endif
-
 }

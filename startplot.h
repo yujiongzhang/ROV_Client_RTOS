@@ -20,9 +20,7 @@ public:
     void addDataSlot1(double _pitch, double _roll, double _yaw);                       //添加画图窗口1中数据
     void setupRealtimeDataDemo2(QCustomPlot *customPlot);//画图窗口2设置
     void addDataSlot2(double mun);                       //添加画图窗口2中数据
-
     void updateSlot(Robot_status_DATA f_robot_status_data);//更新窗口
-
 
 private:
     Ui::startPlot *ui;
@@ -32,7 +30,6 @@ private:
 
 private slots:
     void timeDataSlot();
-
 };
 
 #endif // STARTPLOT_H

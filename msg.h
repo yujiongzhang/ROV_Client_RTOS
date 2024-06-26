@@ -2,7 +2,6 @@
 #define MSG_H
 #pragma pack(1)     //设置结构体为1字节对齐
 #define DFT_ROBOT_COMU_RT_LENGTH    249
-
 #define MOV_CMD_ID 1;
 #define SET_PID_ID 2;
 
@@ -10,7 +9,6 @@ typedef signed char        int8_t;
 typedef short              int16_t;
 typedef int                int32_t;
 typedef long long          int64_t;
-
 /*Unsigned*/
 typedef unsigned char      uint8_t;
 typedef unsigned short     uint16_t;
@@ -19,7 +17,6 @@ typedef unsigned long long uint64_t;
 
 #define SPEED_ADJUST_COMMON 0
 #define SPEED_ADJUST_ACTION 1
-
 
 struct msg_attitude
 {
@@ -105,11 +102,8 @@ struct plot_msg
     float value;
 };
 
-
-
 //--------------------------------------------------
 //--------------- PC ->ROV -------------------------
-
 struct motion_control_cmd_DATA
 {
     int YAW;    //+-0-100
@@ -173,8 +167,6 @@ struct Sonar_set
     int range;
     int gain;
 };
-
-
 
 //----------------------------------------------------------------
 #pragma pack()      //结束结构体对齐设置

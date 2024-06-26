@@ -23,13 +23,10 @@ SOURCES += \
     crc8_crc16.cpp \
     definition.cpp \
     help.cpp \
-    hms2000.cpp \
-    hms2000_thread.cpp \
     joystickrule.cpp \
     main.cpp \
     mainwindow.cpp \
     msg.cpp \
-    navigation.cpp \
     pidsets.cpp \
     qcustomplot.cpp \
     qmotorlineedit.cpp \
@@ -47,12 +44,9 @@ HEADERS += \
     crc8_crc16.h \
     definition.h \
     help.h \
-    hms2000.h \
-    hms2000_thread.h \
     joystickrule.h \
     mainwindow.h \
     msg.h \
-    navigation.h \
     pidsets.h \
     qcustomplot.h \
     qmotorlineedit.h \
@@ -67,7 +61,6 @@ FORMS += \
     help.ui \
     joystickrule.ui \
     mainwindow.ui \
-    navigation.ui \
     pidsets.ui \
     sonarset.ui \
     startplot.ui \
