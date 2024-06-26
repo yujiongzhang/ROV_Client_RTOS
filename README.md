@@ -86,6 +86,8 @@ ffmpeg-4.2.1
 
 - 将config文件夹复制进去
 
+- 将 TCPUDPDbg 文件夹复制进去
+
 
 
 
